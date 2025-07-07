@@ -1,21 +1,17 @@
-# Use Node.js image
-FROM node:18
+# Build stage
+FROM node:18 AS build
 
-# Set working directory
 WORKDIR /app
-
-# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
-
-# Copy the rest of the project
 COPY . .
-
-# Build your app
 RUN npm run build
 
-# Expose port (adjust this based on your app)
-EXPOSE 3000
+# Production stage
+FROM nginx:alpine
 
-# Run the app
-CMD ["npm", "start"]
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
