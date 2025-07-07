@@ -1,16 +1,16 @@
 # Build stage
 FROM node:18 AS build
 
-WORKDIR /app
-COPY package*.json ./
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
 RUN npm install
-COPY . .
+COPY frontend .
 RUN npm run build
 
 # Production stage
 FROM nginx:alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/frontend/build /usr/share/nginx/html
 
 EXPOSE 80
 
