@@ -3,6 +3,7 @@ FROM node:18 AS build
 
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
+RUN rm -rf node_modules .package-lock.json package-lock.json
 RUN npm install
 COPY frontend .
 RUN npm run build
