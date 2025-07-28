@@ -139,6 +139,8 @@ const Calendrier = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showDateBookings, setShowDateBookings] = useState(false);
   const [selectedDateBookings, setSelectedDateBookings] = useState([]);
+  const [cars, setCars] = useState([]);
+  const [carsLoading, setCarsLoading] = useState(true);
 
   // API URL
   const API_URL = process.env.REACT_APP_API_URL;
@@ -172,6 +174,21 @@ const Calendrier = () => {
   useEffect(() => {
     fetchBookings();
   }, []);
+
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        setCarsLoading(true);
+        const res = await axios.get(`${API_URL}/cars`);
+        setCars(res.data);
+        setCarsLoading(false);
+      } catch (err) {
+        setCars([]);
+        setCarsLoading(false);
+      }
+    };
+    fetchCars();
+  }, [API_URL]);
 
   // Gestionnaire de clic global pour fermer les pop-ups
   useEffect(() => {
@@ -356,21 +373,57 @@ const Calendrier = () => {
     if (!selectedBooking || !showInfo) return null;
     
     return (
-      <div className="popup-overlay" style={styles.popupOverlay}>
+      <div className="popup-overlay" style={{ ...styles.popupOverlay, background: 'rgba(0,0,0,0.25)' }}>
         <div 
           ref={infoPopupRef}
-          style={styles.infoTooltipCentered}
+          style={{
+            ...styles.infoTooltipCentered,
+            maxWidth: 420,
+            borderRadius: 16,
+            boxShadow: '0 8px 32px rgba(24, 144, 255, 0.18)',
+            background: 'linear-gradient(120deg, #fafdff 80%, #e6f7ff 100%)',
+            padding: 0,
+          }}
         >
-          <div style={styles.infoHeader}>
-            <h3 style={styles.infoTitle}>Détails de la réservation</h3>
-            <button style={styles.closeButton} onClick={handleCloseInfo}>×</button>
+          <div style={{
+            ...styles.infoHeader,
+            background: 'linear-gradient(90deg, #1890ff 60%, #40a9ff 100%)',
+            color: '#fff',
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
+            padding: '18px 28px',
+            borderBottom: 'none',
+          }}>
+            <h3 style={{ margin: 0, fontSize: 20, fontWeight: 700, letterSpacing: 1 }}>Détails de la réservation</h3>
+            <button style={{ ...styles.closeButton, color: '#fff', fontSize: 28 }} onClick={handleCloseInfo}>×</button>
           </div>
-          <div style={styles.infoContent}>
-            <p><strong>Voiture:</strong> {selectedBooking.Car ? selectedBooking.Car.name : 'Non spécifié'}</p>
-            <p><strong>Client:</strong> {selectedBooking.User ? selectedBooking.User.name : 'Non spécifié'}</p>
-            <p><strong>Début:</strong> {moment(selectedBooking.start_date).locale('fr').format('DD/MM/YYYY')}</p>
-            <p><strong>Fin:</strong> {moment(selectedBooking.end_date).locale('fr').format('DD/MM/YYYY')}</p>
-            <p><strong>Statut:</strong> {translations[selectedBooking.status.toLowerCase()][language]}</p>
+          <div style={{
+            padding: '28px 28px 18px 28px',
+            display: 'grid',
+            gridTemplateColumns: '140px 1fr',
+            rowGap: 14,
+            columnGap: 10,
+            fontSize: 15,
+            color: '#222',
+            background: 'transparent',
+          }}>
+            <div style={{ fontWeight: 600, color: '#888' }}>ID Réservation:</div>
+            <div style={{ fontWeight: 500 }}>{selectedBooking.id || 'Non spécifié'}</div>
+            <div style={{ fontWeight: 600, color: '#888' }}>Voiture:</div>
+            <div style={{ fontWeight: 500 }}>{selectedBooking.Car ? selectedBooking.Car.name : 'Non spécifié'}</div>
+            <div style={{ fontWeight: 600, color: '#888' }}>Matricule:</div>
+            <div style={{ fontWeight: 500 }}>{selectedBooking.Car && selectedBooking.Car.matricule ? selectedBooking.Car.matricule : 'Non spécifié'}</div>
+            <div style={{ fontWeight: 600, color: '#888' }}>Client:</div>
+            <div style={{ fontWeight: 500 }}>{selectedBooking.User ? selectedBooking.User.name : 'Non spécifié'}</div>
+            <div style={{ fontWeight: 600, color: '#888' }}>Téléphone:</div>
+            <div style={{ fontWeight: 500 }}>{selectedBooking.User && selectedBooking.User.phone ? selectedBooking.User.phone : 'Non spécifié'}</div>
+            <div style={{ gridColumn: '1 / span 2', borderTop: '1px solid #e6f7ff', margin: '8px 0' }}></div>
+            <div style={{ fontWeight: 600, color: '#888' }}>Début:</div>
+            <div style={{ fontWeight: 500 }}>{moment(selectedBooking.start_date).locale('fr').format('DD/MM/YYYY')}</div>
+            <div style={{ fontWeight: 600, color: '#888' }}>Fin:</div>
+            <div style={{ fontWeight: 500 }}>{moment(selectedBooking.end_date).locale('fr').format('DD/MM/YYYY')}</div>
+            <div style={{ fontWeight: 600, color: '#888' }}>Statut:</div>
+            <div style={{ fontWeight: 600, color: '#1890ff', textTransform: 'capitalize' }}>{translations[selectedBooking.status.toLowerCase()][language]}</div>
           </div>
         </div>
       </div>
@@ -441,173 +494,229 @@ const Calendrier = () => {
     );
   };
 
+  // Gantt/resource style for month view
   const renderMonthView = () => {
+    if (carsLoading) {
+      return <div style={styles.loadingIndicator}>Chargement des voitures...</div>;
+    }
+    // Get all cars
+    const daysInMonth = currentDate.daysInMonth();
     const startOfMonth = moment(currentDate).startOf('month');
     const endOfMonth = moment(currentDate).endOf('month');
-    const startDate = moment(startOfMonth).startOf('week');
-    const endDate = moment(endOfMonth).endOf('week');
-    
-    const days = [];
-    let day = startDate;
-    
-    // Ajouter les jours de la semaine
-    const weekdays = [];
-    for (let i = 0; i < 7; i++) {
-      weekdays.push(
-        <div key={`header-${i}`} style={styles.calendarHeaderDay}>
-          {moment().locale('fr').day(i).format('ddd')}
+    const daysArray = Array.from({ length: daysInMonth }, (_, i) => startOfMonth.clone().add(i, 'days'));
+
+    // Helper: get bookings for a car in this month
+    const getCarBookingsForMonth = (carId) => {
+      return bookings.filter(b => b.Car && b.Car.id === carId && (
+        moment(b.start_date).isBefore(endOfMonth) && moment(b.end_date).isAfter(startOfMonth)
+      ));
+    };
+
+    return (
+      <div style={{ overflowX: 'auto', paddingBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: `180px repeat(${daysInMonth}, 1fr)`, minWidth: 900 }}>
+          {/* Header Row: Car label + days of month */}
+          <div style={{ background: '#fafafa', fontWeight: 'bold', borderRight: '1px solid #eee', padding: 8, position: 'sticky', left: 0, zIndex: 2 }}></div>
+          {daysArray.map((d, i) => (
+            <div key={d.format('YYYY-MM-DD')} style={{ background: '#fafafa', fontWeight: 'bold', fontSize: 13, textAlign: 'center', borderRight: i === daysArray.length - 1 ? 'none' : '1px solid #eee', borderBottom: '2px solid #e6f7ff', color: '#888', padding: 6 }}>{d.date()}</div>
+          ))}
+          {/* Car rows */}
+          {cars.map((car, carIdx) => (
+            <React.Fragment key={car.id}>
+              {/* Car name cell */}
+              <div style={{
+                background: carIdx % 2 === 0 ? '#f8fafc' : '#fff',
+                fontWeight: 600,
+                borderRight: '1px solid #eee',
+                borderBottom: carIdx === cars.length - 1 ? '2px solid #e6f7ff' : '1px solid #eee',
+                padding: 8,
+                position: 'sticky',
+                left: 0,
+                zIndex: 1,
+                minWidth: 140,
+                color: '#222',
+                fontSize: 14,
+                textAlign: 'center',
+                backgroundClip: 'padding-box',
+                letterSpacing: 1,
+              }}>{car.name}</div>
+              {/* Booking grid cell */}
+              <div style={{
+                gridColumn: `span ${daysInMonth}`,
+                position: 'relative',
+                minHeight: 32,
+                background: carIdx % 2 === 0 ? '#f8fafc' : '#fff',
+                borderBottom: carIdx === cars.length - 1 ? '2px solid #e6f7ff' : '1px solid #eee',
+                overflow: 'visible',
+              }}>
+                {/* Days grid background */}
+                <div style={{ display: 'grid', gridTemplateColumns: `repeat(${daysInMonth}, 1fr)`, height: 32, position: 'absolute', width: '100%', zIndex: 0, top: 0, left: 0 }}>
+                  {daysArray.map((_, i) => (
+                    <div key={i} style={{ borderRight: i === daysArray.length - 1 ? 'none' : '1px solid #eee', height: '100%' }}></div>
+                  ))}
         </div>
-      );
-    }
-    
-    // Ajouter les jours
-    while (day <= endDate) {
-      const currentDay = moment(day);
-      const isCurrentMonth = currentDay.month() === currentDate.month();
-      const isToday = currentDay.isSame(moment(), 'day');
-      const dayBookings = getBookingsForDate(currentDay);
-      
-      days.push(
-        <div 
-          key={day.format('YYYY-MM-DD')} 
-          style={{
-            ...styles.calendarDay,
-            ...(isCurrentMonth ? {} : styles.otherMonth),
-            ...(isToday ? styles.todayCell : {})
-          }}
-        >
-          <div style={styles.dateNumber}>{day.date()}</div>
-          <div style={styles.dayContent}>
-            {dayBookings.length > 0 ? (
-              <>
-                {dayBookings.slice(0, 5).map((booking, idx) => {
-                  const isStartDate = moment(booking.start_date).startOf('day').isSame(currentDay.startOf('day'));
-                  const isEndDate = moment(booking.end_date).startOf('day').isSame(currentDay.startOf('day'));
-                  const bookingColor = getBookingColor(booking.id);
-                  
+                {/* Bookings as bars */}
+                {getCarBookingsForMonth(car.id).map((booking, idx) => {
+                  // Clamp booking to visible month
+                  const bookingStart = moment.max(moment(booking.start_date).startOf('day'), startOfMonth);
+                  const bookingEnd = moment.min(moment(booking.end_date).endOf('day'), endOfMonth);
+                  const startOffset = bookingStart.diff(startOfMonth, 'days');
+                  const endOffset = bookingEnd.diff(startOfMonth, 'days') + 1;
+                  const left = (startOffset / daysInMonth) * 100;
+                  const width = ((endOffset - startOffset) / daysInMonth) * 100;
+                  const color = getBookingColor(booking.id, 0.85);
                   return (
                     <div 
-                      key={`${booking.id}-${idx}`} 
+                      key={booking.id + '-' + idx}
                       style={{
-                        ...styles.bookingPill,
-                        backgroundColor: bookingColor,
+                        position: 'absolute',
+                        top: 8 + idx * 22,
+                        left: `${left}%`,
+                        width: `${width}%`,
+                        height: 18,
+                        background: color,
+                        borderRadius: 6,
+                        boxShadow: '0 2px 8px rgba(24,144,255,0.08)',
                         display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        padding: '0 10px',
+                        color: '#fff',
+                        fontWeight: 500,
+                        fontSize: 12,
+                        cursor: 'pointer',
+                        border: `1.5px solid ${color}`,
+                        zIndex: 2 + idx,
+                        transition: 'box-shadow 0.18s, transform 0.18s',
+                        overflow: 'hidden',
+                        letterSpacing: 0.2,
                       }}
+                      title={`${booking.User ? booking.User.name : ''} | ${moment(booking.start_date).format('DD/MM')} - ${moment(booking.end_date).format('DD/MM')}`}
+                      onClick={e => handleInfoClick(e, booking)}
                     >
-                      <span>
-                        {isStartDate ? 'Début: ' + moment(booking.start_date).locale('fr').format('DD/MM') : ''}
-                        {isEndDate ? 'Fin: ' + moment(booking.end_date).locale('fr').format('DD/MM') : ''}
+                      <span style={{ fontWeight: 400, color: '#fff', fontSize: 12, opacity: 0.95 }}>
+                        {booking.User ? booking.User.name : ''}
                       </span>
-                      <button 
-                        style={styles.infoButton}
-                        onClick={(e) => handleInfoClick(e, booking)}
-                      >
-                        i
-                      </button>
                     </div>
                   );
                 })}
-                {dayBookings.length > 5 && (
-                  <button 
-                    style={styles.moreBookingsButton}
-                    onClick={(e) => handleShowDateBookings(e, dayBookings, currentDay)}
-                  >
-                    +{dayBookings.length - 5}
-                  </button>
-                )}
-              </>
-            ) : null}
           </div>
-        </div>
-      );
-      
-      day = day.clone().add(1, 'day');
-    }
-    
-    return (
-      <div style={styles.calendarContainer}>
-        <div style={styles.calendarGrid}>
-          {weekdays}
-          {days}
+            </React.Fragment>
+          ))}
         </div>
       </div>
     );
   };
 
+  // Gantt/resource style for week view
   const renderWeekView = () => {
+    if (carsLoading) {
+      return <div style={styles.loadingIndicator}>Chargement des voitures...</div>;
+    }
+    // Define days in week
     const startOfWeek = moment(currentDate).startOf('week');
-    const endOfWeek = moment(currentDate).endOf('week');
-    
-    const days = [];
-    let day = startOfWeek;
-    
-    while (day <= endOfWeek) {
-      const currentDay = moment(day);
-      const isToday = currentDay.isSame(moment(), 'day');
-      const dayBookings = getBookingsForDate(currentDay);
-      
-      days.push(
-        <div 
-          key={day.format('YYYY-MM-DD')} 
-          style={{
-            ...styles.weekDay,
-            ...(isToday ? styles.todayCell : {})
-          }}
-        >
-          <div style={styles.weekDayHeader}>
-            <div style={styles.weekDayName}>{day.locale('fr').format('ddd')}</div>
-            <div style={styles.weekDayNumber}>{day.date()}</div>
+    const daysArray = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'days'));
+
+    // Helper: get bookings for a car in this week
+    const getCarBookingsForWeek = (carId) => {
+      const endOfWeek = moment(startOfWeek).endOf('week');
+      return bookings.filter(b => b.Car && b.Car.id === carId && (
+        moment(b.start_date).isBefore(endOfWeek) && moment(b.end_date).isAfter(startOfWeek)
+      ));
+    };
+
+    return (
+      <div style={{ overflowX: 'auto', paddingBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: `180px repeat(7, 1fr)`, minWidth: 900 }}>
+          {/* Header Row: Car label + days of week */}
+          <div style={{ background: '#fafafa', fontWeight: 'bold', borderRight: '1px solid #eee', padding: 8, position: 'sticky', left: 0, zIndex: 2 }}></div>
+          {daysArray.map((d, i) => (
+            <div key={d.format('YYYY-MM-DD')} style={{ background: '#fafafa', fontWeight: 'bold', fontSize: 13, textAlign: 'center', borderRight: i === daysArray.length - 1 ? 'none' : '1px solid #eee', borderBottom: '2px solid #e6f7ff', color: '#888', padding: 6 }}>{d.format('ddd')}</div>
+          ))}
+          {/* Car rows */}
+          {cars.map((car, carIdx) => (
+            <React.Fragment key={car.id}>
+              {/* Car name cell */}
+              <div style={{
+                background: carIdx % 2 === 0 ? '#f8fafc' : '#fff',
+                fontWeight: 600,
+                borderRight: '1px solid #eee',
+                borderBottom: carIdx === cars.length - 1 ? '2px solid #e6f7ff' : '1px solid #eee',
+                padding: 8,
+                position: 'sticky',
+                left: 0,
+                zIndex: 1,
+                minWidth: 140,
+                color: '#222',
+                fontSize: 14,
+                textAlign: 'center',
+                backgroundClip: 'padding-box',
+                letterSpacing: 1,
+              }}>{car.name}</div>
+              {/* Booking grid cell */}
+              <div style={{
+                gridColumn: `span 7`,
+                position: 'relative',
+                minHeight: 32,
+                background: carIdx % 2 === 0 ? '#f8fafc' : '#fff',
+                borderBottom: carIdx === cars.length - 1 ? '2px solid #e6f7ff' : '1px solid #eee',
+                overflow: 'visible',
+              }}>
+                {/* Days grid background */}
+                <div style={{ display: 'grid', gridTemplateColumns: `repeat(7, 1fr)`, height: 32, position: 'absolute', width: '100%', zIndex: 0, top: 0, left: 0 }}>
+                  {daysArray.map((_, i) => (
+                    <div key={i} style={{ borderRight: i === daysArray.length - 1 ? 'none' : '1px solid #eee', height: '100%' }}></div>
+                  ))}
           </div>
-          <div style={styles.weekDayContent}>
-            {dayBookings.length > 0 ? (
-              dayBookings.map((booking, idx) => {
-                const isStartDate = moment(booking.start_date).startOf('day').isSame(currentDay.startOf('day'));
-                const isEndDate = moment(booking.end_date).startOf('day').isSame(currentDay.startOf('day'));
-                const bookingColor = getBookingColor(booking.id);
-                
+                {/* Bookings as bars */}
+                {getCarBookingsForWeek(car.id).map((booking, idx) => {
+                  // Clamp booking to visible week
+                  const weekStart = startOfWeek;
+                  const weekEnd = moment(startOfWeek).endOf('week');
+                  const bookingStart = moment.max(moment(booking.start_date).startOf('day'), weekStart);
+                  const bookingEnd = moment.min(moment(booking.end_date).endOf('day'), weekEnd);
+                  const startOffset = bookingStart.diff(weekStart, 'days');
+                  const endOffset = bookingEnd.diff(weekStart, 'days') + 1;
+                  const left = (startOffset / 7) * 100;
+                  const width = ((endOffset - startOffset) / 7) * 100;
+                  const color = getBookingColor(booking.id, 0.85);
                 return (
                   <div 
-                    key={`${booking.id}-${idx}`} 
+                      key={booking.id + '-' + idx}
                     style={{
-                      ...styles.weekBooking,
-                      backgroundColor: `${bookingColor}33`, // Ajouter 33 (20% d'opacité) en hexadécimal
-                      borderLeft: `4px solid ${bookingColor}`,
+                        position: 'absolute',
+                        top: 8 + idx * 22,
+                        left: `${left}%`,
+                        width: `${width}%`,
+                        height: 18,
+                        background: color,
+                        borderRadius: 6,
+                        boxShadow: '0 2px 8px rgba(24,144,255,0.08)',
                       display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
-                    }}
-                  >
-                    <div style={styles.bookingTime}>
-                      {isStartDate ? <strong>Début: </strong> : ''}
-                      {isStartDate ? moment(booking.start_date).locale('fr').format('DD/MM/YYYY') : ''}
-                      
-                      {isEndDate ? <strong>Fin: </strong> : ''}
-                      {isEndDate ? moment(booking.end_date).locale('fr').format('DD/MM/YYYY') : ''}
-                    </div>
-                    <button 
-                      style={styles.infoButton}
-                      onClick={(e) => handleInfoClick(e, booking)}
+                        alignItems: 'center',
+                        padding: '0 10px',
+                        color: '#fff',
+                        fontWeight: 500,
+                        fontSize: 12,
+                        cursor: 'pointer',
+                        border: `1.5px solid ${color}`,
+                        zIndex: 2 + idx,
+                        transition: 'box-shadow 0.18s, transform 0.18s',
+                        overflow: 'hidden',
+                        letterSpacing: 0.2,
+                      }}
+                      title={`${booking.User ? booking.User.name : ''} | ${moment(booking.start_date).format('DD/MM')} - ${moment(booking.end_date).format('DD/MM')}`}
+                      onClick={e => handleInfoClick(e, booking)}
                     >
-                      i
-                    </button>
+                      <span style={{ fontWeight: 400, color: '#fff', fontSize: 12, opacity: 0.95 }}>
+                        {booking.User ? booking.User.name : ''}
+                      </span>
                   </div>
                 );
-              })
-            ) : (
-              <div style={styles.noBookings}>{translations.noBookings[language]}</div>
-            )}
+                })}
           </div>
+            </React.Fragment>
+          ))}
         </div>
-      );
-      
-      day = day.clone().add(1, 'day');
-    }
-    
-    return (
-      <div style={styles.weekContainer}>
-        {days}
       </div>
     );
   };

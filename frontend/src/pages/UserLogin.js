@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UserLogin = () => {
-  const [username, setUsername] = useState("");
+  const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
@@ -14,6 +14,9 @@ const UserLogin = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const navigate = useNavigate();
+
+  // Use fallback for API URL
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 
   // Handle window resize
   useEffect(() => {
@@ -67,9 +70,10 @@ const UserLogin = () => {
     
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/login`,
-        { email: username, password }
+        `${API_URL}/users/login`,
+        { email, password }
       );
+      
       
       if (response.data.success) {
         // Add client role to user object
@@ -109,28 +113,34 @@ const UserLogin = () => {
           
           {error && <div style={styles.errorBox}>{error}</div>}
           
-          <form onSubmit={handleSubmit} style={styles.form}>
+          <form onSubmit={handleSubmit} style={styles.form} autoComplete="on">
             <div style={styles.inputGroup}>
-              <label style={styles.label}>Email Address</label>
+              <label style={styles.label} htmlFor="login-email">Email Address</label>
               <input
+                id="login-email"
                 type="email"
-                value={username}
+                value={email}
                 onChange={(e) => setUsername(e.target.value)}
                 style={styles.input}
                 className="input-field"
                 placeholder="example@example.com"
+                autoComplete="email"
+                required
               />
             </div>
             
             <div style={styles.inputGroup}>
-              <label style={styles.label}>Password</label>
+              <label style={styles.label} htmlFor="login-password">Password</label>
               <input
+                id="login-password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 style={styles.input}
                 className="input-field"
                 placeholder="********"
+                autoComplete="current-password"
+                required
               />
             </div>
             
@@ -174,13 +184,11 @@ const UserLogin = () => {
 
       {/* IMAGE SIDE (Right) - Hide on smaller screens */}
       {screenWidth >= 768 && (
-        <div style={styles.imageSide}>
-          {/* You can add content here if you wish */}
-        </div>
+        <div style={styles.imageSide} />
       )}
 
       {/* Forgot Password Modal */}
-      {showForgotModal && <ForgotPasswordModal closeModal={closeForgotModal} />}
+      {showForgotModal && <ForgotPasswordModal closeModal={closeForgotModal} API_URL={API_URL} />}
     </div>
   );
 };
@@ -188,7 +196,7 @@ const UserLogin = () => {
 // ===================================================================
 //                     ForgotPasswordModal
 // ===================================================================
-const ForgotPasswordModal = ({ closeModal }) => {
+const ForgotPasswordModal = ({ closeModal, API_URL }) => {
   // step = 1: enter email and send code
   // step = 2: enter received code and verify
   // step = 3: enter new password and confirmation
@@ -201,6 +209,8 @@ const ForgotPasswordModal = ({ closeModal }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Use API_URL from props
+
   // Step 1: Send code via email
   const handleSendCode = async (e) => {
     e.preventDefault();
@@ -209,7 +219,7 @@ const ForgotPasswordModal = ({ closeModal }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/forgot-password`,
+        `${API_URL}/users/forgot-password`,
         { email }
       );
       if (response.data.success) {
@@ -235,7 +245,7 @@ const ForgotPasswordModal = ({ closeModal }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/verify-code`,
+        `${API_URL}/users/verify-code`,
         { email, code }
       );
       if (response.data.success) {
@@ -265,7 +275,7 @@ const ForgotPasswordModal = ({ closeModal }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/reset-password`,
+        `${API_URL}/users/reset-password`,
         { email, code, newPassword }
       );
       if (response.data.success) {

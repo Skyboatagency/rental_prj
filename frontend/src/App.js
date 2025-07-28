@@ -30,6 +30,9 @@ import VidangeManagement from './pages/VidangeManagement';
 import AdminRegister from './pages/AdminRegister';
 import { LanguageProvider } from './LanguageContext';
 import './App.css';
+import AdminRoute from './components/AdminRoute';
+import UserRoute from './components/UserRoute';
+import PublicOnlyRoute from './components/PublicOnlyRoute';
 
 // Create a wrapper component to handle navbar visibility
 const AppContent = () => {
@@ -68,9 +71,9 @@ const AppContent = () => {
             <div className="main-content">
             <Routes>
                 {/* Pages publiques */}
-                <Route path="/" element={<Home />} />
-                <Route path="/available-cars" element={<AvailableCar />} />
-                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/" element={<PublicOnlyRoute><Home /></PublicOnlyRoute>} />
+                <Route path="/available-cars" element={<PublicOnlyRoute><AvailableCar /></PublicOnlyRoute>} />
+                <Route path="/contact-us" element={<PublicOnlyRoute><ContactUs /></PublicOnlyRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin-register" element={<AdminRegister />} />
                 <Route path="/UserLogin" element={<UserLogin />} />
@@ -79,27 +82,28 @@ const AppContent = () => {
                 <Route path="/policy" element={<Policy />} />
 
                 {/* Pages protégées - nécessitent une authentification */}
-                <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-                <Route path="/my-profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-                <Route path="/my-bookings" element={<ProtectedRoute><Bookings /></ProtectedRoute>} />
-                <Route path="/preferences" element={<ProtectedRoute><Preferences /></ProtectedRoute>} />
-                <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
-                <Route path="/help-center" element={<ProtectedRoute><HelpCenter /></ProtectedRoute>} />
-                <Route path="/contact-support" element={<ProtectedRoute><ContactSupport /></ProtectedRoute>} />
-                <Route path="/password" element={<ProtectedRoute><Password /></ProtectedRoute>} />
-                <Route path="/change-password" element={<ProtectedRoute><Password /></ProtectedRoute>} />
+                <Route path="/profile" element={<UserRoute><Profile /></UserRoute>} />
+                <Route path="/my-profile" element={<UserRoute><Profile /></UserRoute>} />
+                <Route path="/my-bookings" element={<UserRoute><Bookings /></UserRoute>} />
+                <Route path="/preferences" element={<UserRoute><Preferences /></UserRoute>} />
+                <Route path="/notifications" element={<UserRoute><Notifications /></UserRoute>} />
+                <Route path="/help-center" element={<UserRoute><HelpCenter /></UserRoute>} />
+                <Route path="/contact-support" element={<UserRoute><ContactSupport /></UserRoute>} />
+                <Route path="/password" element={<UserRoute><Password /></UserRoute>} />
+                <Route path="/change-password" element={<UserRoute><Password /></UserRoute>} />
+            
 
                 {/* Pages admin protégées */}
-                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                <Route path="/cars" element={<ProtectedRoute><CarManagement /></ProtectedRoute>} />
-                <Route path="/users" element={<ProtectedRoute><UserManagement /></ProtectedRoute>} />
-                <Route path="/bookings" element={<ProtectedRoute><BookingManagement /></ProtectedRoute>} />
-                <Route path="/calendrier" element={<ProtectedRoute><Calendrier /></ProtectedRoute>} />
-                <Route path="/analytics" element={<ProtectedRoute><AnalyticsReports /></ProtectedRoute>} />
-                <Route path="/location" element={<ProtectedRoute><LocationContact /></ProtectedRoute>} />
-                <Route path="/settings" element={<ProtectedRoute><SettingsPreferences /></ProtectedRoute>} />
-                <Route path="/feedback" element={<ProtectedRoute><FeedbackReviews /></ProtectedRoute>} />
-                <Route path="/vidanges/:carId" element={<ProtectedRoute><VidangeManagement /></ProtectedRoute>} />
+                <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
+                <Route path="/cars" element={<AdminRoute><CarManagement /></AdminRoute>} />
+                <Route path="/users" element={<AdminRoute><UserManagement /></AdminRoute>} />
+                <Route path="/bookings" element={<AdminRoute><BookingManagement /></AdminRoute>} />
+                <Route path="/calendrier" element={<AdminRoute><Calendrier /></AdminRoute>} />
+                <Route path="/analytics" element={<AdminRoute><AnalyticsReports /></AdminRoute>} />
+                <Route path="/location" element={<AdminRoute><LocationContact /></AdminRoute>} />
+                <Route path="/settings" element={<AdminRoute><SettingsPreferences /></AdminRoute>} />
+                <Route path="/feedback" element={<AdminRoute><FeedbackReviews /></AdminRoute>} />
+                <Route path="/vidanges/:carId" element={<AdminRoute><VidangeManagement /></AdminRoute>} />
             </Routes>
             </div>
         </div>
@@ -108,11 +112,11 @@ const AppContent = () => {
 
 function App() {
     return (
-        <Router>
-            <LanguageProvider>
+        <LanguageProvider>
+            <Router>
                 <AppContent />
-            </LanguageProvider>
-        </Router>
+            </Router>
+        </LanguageProvider>
     );
 }
 

@@ -105,7 +105,6 @@ const LanguageSwitcher = ({ language, setLanguage }) => {
   return (
     <div style={styles.languageSwitcher}>
       <button style={styles.langButton} onClick={() => changeLanguage('fr')}>FR</button>
-      <button style={styles.langButton} onClick={() => changeLanguage('ar')}>AR</button>
       <button style={styles.langButton} onClick={() => changeLanguage('en')}>EN</button>
     </div>
   );
@@ -445,12 +444,12 @@ const UserManagement = () => {
                           <span
                             style={{
                               ...styles.statusBadge,
-                              backgroundColor: user.status === 'active' ? 'rgba(82, 196, 26, 0.2)' : 'rgba(255, 77, 79, 0.2)',
-                              color: user.status === 'active' ? '#52c41a' : '#ff4d4f',
+                              backgroundColor: (user.total_bookings && user.total_bookings > 0) ? 'rgba(82, 196, 26, 0.2)' : 'rgba(155, 155, 155, 0.2)',
+                              color: (user.total_bookings && user.total_bookings > 0) ? '#52c41a' : '#999',
                               fontSize: isMobile ? 12 : 12,
                             }}
                           >
-                            {user.status || 'N/A'}
+                            {(user.total_bookings && user.total_bookings > 0) ? 'active' : 'N/A'}
                           </span>
                           {isMobile && (
                             <span style={{ ...styles.userRole, fontSize: 12, color: '#888' }}>{user.role || 'User'}</span>
@@ -477,10 +476,15 @@ const UserManagement = () => {
                             </button>
                             <button
                               style={isMobile ? { ...styles.deleteButton, fontSize: 13, padding: '8px 0', minWidth: 0, flex: 1 } : styles.deleteButton}
-                              onClick={() => {
+                              onClick={async () => {
                                 if (window.confirm('Are you sure you want to delete this user?')) {
-                                  // Delete logic would go here
-                                  console.log('Delete user:', user.id);
+                                  try {
+                                    await axios.delete(`${process.env.REACT_APP_API_URL}/users/${user.id}`);
+                                    setUsers(users.filter(u => u.id !== user.id));
+                                    alert('User deleted successfully!');
+                                  } catch (error) {
+                                    alert('Failed to delete user.');
+                                  }
                                 }
                               }}
                               className="delete-button card-icon-button"
@@ -646,11 +650,11 @@ const UserManagement = () => {
                   <span 
                     style={{
                       ...styles.modalStatusBadge,
-                      backgroundColor: selectedUser.status === 'active' ? 'rgba(82, 196, 26, 0.2)' : 'rgba(255, 77, 79, 0.2)',
-                      color: selectedUser.status === 'active' ? '#52c41a' : '#ff4d4f'
+                      backgroundColor: (selectedUser.total_bookings && selectedUser.total_bookings > 0) ? 'rgba(82, 196, 26, 0.2)' : 'rgba(155, 155, 155, 0.2)',
+                      color: (selectedUser.total_bookings && selectedUser.total_bookings > 0) ? '#52c41a' : '#999'
                     }}
                   >
-                    {selectedUser.status || 'N/A'}
+                    {(selectedUser.total_bookings && selectedUser.total_bookings > 0) ? 'active' : 'N/A'}
                   </span>
                 </div>
                 <div style={styles.modalDetail}>
@@ -705,6 +709,18 @@ const UserManagement = () => {
                 <button
                   style={isMobile ? { ...styles.modalDeleteButton, width: '100%' } : styles.modalDeleteButton}
                   className="delete-button"
+                  onClick={async () => {
+                    if (window.confirm('Are you sure you want to delete this user?')) {
+                      try {
+                        await axios.delete(`${process.env.REACT_APP_API_URL}/users/${selectedUser.id}`);
+                        setUsers(users.filter(u => u.id !== selectedUser.id));
+                        setSelectedUser(null);
+                        alert('User deleted successfully!');
+                      } catch (error) {
+                        alert('Failed to delete user.');
+                      }
+                    }
+                  }}
                 >
                   <FaTrash style={styles.actionIcon} /> Delete User
                 </button>
@@ -1314,6 +1330,22 @@ const styles = {
   settingsNote: {
     fontSize: '12px',
     color: 'rgba(255,255,255,0.7)',
+  },
+  languageSwitcher: {
+    display: 'flex',
+    gap: '10px',
+    marginRight: '20px',
+  },
+  langButton: {
+    padding: '8px 12px',
+    border: '1px solid #d9d9d9',
+    borderRadius: '6px',
+    backgroundColor: '#f0f0f0',
+    color: '#333',
+    fontSize: '14px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
   },
 };
 

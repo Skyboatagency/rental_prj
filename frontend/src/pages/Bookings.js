@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -11,26 +11,24 @@ import {
 import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
 import 'moment/locale/fr';
+import { LanguageContext } from '../LanguageContext';
 
 /*--------------------------------*/
 /*         Bookings Page          */
 /*--------------------------------*/
 const Bookings = () => {
-  const storedUser = localStorage.getItem("user");
-  let localUser = null;
-  try {
-    localUser = storedUser ? JSON.parse(storedUser) : null;
-  } catch (error) {
-    console.error("Error parsing user data:", error);
-    // Si erreur de parsing, considérer l'utilisateur comme non connecté
-  }
+  const [localUser, setLocalUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    try {
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch {
+      return null;
+    }
+  });
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currency, setCurrency] = useState('MAD');
-  const [selectedLanguage, setSelectedLanguage] = useState(() => {
-    return localStorage.getItem('language') || 'en';
-  });
   const [bookings, setBookings] = useState([]);
-  const [activeTab, setActiveTab] = useState('all'); // 'all' | 'pending' | 'approved' | 'completed' | 'denied'
+  const [activeTab, setActiveTab] = useState('all'); // 'all' | 'pending' | 'approved' | 'completed' | 'cancelled'
   const [feedbackStates, setFeedbackStates] = useState({}); // { [bookingId]: { hasFeedback: bool, loading: bool } }
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [feedbackBooking, setFeedbackBooking] = useState(null);
@@ -46,7 +44,11 @@ const Bookings = () => {
   // Calculate paginated bookings
   const getPaginatedBookings = () => {
     const filteredBookings = bookings.filter(b => 
-      activeTab === 'all' ? true : (b.status && b.status.toLowerCase() === activeTab.toLowerCase())
+      activeTab === 'all' ? true : (
+        activeTab === 'cancelled'
+          ? (b.status && b.status.toLowerCase() === 'cancelled')
+          : (b.status && b.status.toLowerCase() === activeTab.toLowerCase())
+      )
     );
     
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -153,53 +155,11 @@ const Bookings = () => {
       footerHome: "Accueil",
       footerLocation: "Informations de contact",
       footerCopyright: "©2024 Diabcar. Tous droits réservés"
-    },
-    ar: {
-      // Bookings page translations
-      bookingsTitle: "حجوزاتي",
-      pending: "قيد الانتظار",
-      approved: "تمت الموافقة",
-      completed: "مكتملة",
-      denied: "مرفوضة",
-      noBookings: "لم يتم العثور على حجوزات ذات حالة {status}.",
-      pricePerDay: "السعر لليوم الواحد",
-      bookingDate: "تاريخ الحجز",
-      returnDate: "تاريخ العودة",
-      duration: "المدة",
-      day: "يوم",
-      days: "أيام",
-      totalCost: "التكلفة الإجمالية",
-      details: "التفاصيل",
-      // TopBar translations
-      navHome: "الرئيسية",
-      navAvailableCars: "السيارات المتاحة",
-      navContactUs: "اتصل بنا",
-      signIn: "تسجيل الدخول",
-      signOut: "تسجيل الخروج",
-      login: "دخول",
-      register: "تسجيل",
-      myProfile: "ملفي الشخصي",
-      myBookings: "حجوزاتي",
-      accountSettings: "إعدادات الحساب",
-      notifications: "الإشعارات",
-      preferences: "التفضيلات",
-      changePassword: "تغيير كلمة المرور",
-      customerSupport: "دعم العملاء",
-      helpCenter: "مركز المساعدة",
-      contactSupport: "اتصل بالدعم",
-      notLoggedIn: "غير مسجل الدخول",
-      profileOverview: "نظرة عامة على الملف الشخصي",
-      // Footer translations
-      footerAbout: "من نحن",
-      footerQuickLinks: "روابط سريعة",
-      footerContact: "اتصل بنا",
-      footerHome: "الرئيسية",
-      footerLocation: "معلومات الاتصال",
-      footerCopyright: "2024© دياب كار. جميع الحقوق محفوظة"
     }
   };
   
-  const lang = texts[selectedLanguage];
+  const { language, setLanguage } = useContext(LanguageContext);
+  const lang = texts[language];
   
   const API_URL = process.env.REACT_APP_API_URL;
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -372,7 +332,7 @@ const Bookings = () => {
                 booking.status === 'completed' ? '#52c41a' :
                 booking.status === 'approved' ? '#1890ff' :
                 booking.status === 'pending' ? '#faad14' :
-                booking.status === 'denied' ? '#ff4d4f' :
+                booking.status === 'cancelled' ? '#ff4d4f' :
                 '#666',
               fontWeight: 600,
               fontSize: 13,
@@ -485,8 +445,8 @@ const Bookings = () => {
         isLoggedIn={!!localUser}
         userName={localUser ? localUser.name : ''}
         onSignOut={handleSignOut}
-        selectedLanguage={selectedLanguage}
-        setSelectedLanguage={setSelectedLanguage}
+        selectedLanguage={language}
+        setSelectedLanguage={setLanguage}
         lang={lang}
       />
       
@@ -502,31 +462,31 @@ const Bookings = () => {
             style={{ ...(activeTab === 'all' ? styles.tabButtonActive : styles.tabButton), ...tabButtonMobileStyle }}
             onClick={() => setActiveTab('all')}
           >
-            All Bookings
+            {lang.bookingsTitle}
           </button>
           <button 
             style={{ ...(activeTab === 'pending' ? styles.tabButtonActive : styles.tabButton), ...tabButtonMobileStyle }}
             onClick={() => setActiveTab('pending')}
           >
-            Pending
+            {lang.pending}
           </button>
           <button 
             style={{ ...(activeTab === 'approved' ? styles.tabButtonActive : styles.tabButton), ...tabButtonMobileStyle }}
             onClick={() => setActiveTab('approved')}
           >
-            Approved
+            {lang.approved}
           </button>
           <button 
             style={{ ...(activeTab === 'completed' ? styles.tabButtonActive : styles.tabButton), ...tabButtonMobileStyle }}
             onClick={() => setActiveTab('completed')}
           >
-            Completed
+            {lang.completed}
           </button>
           <button 
-            style={{ ...(activeTab === 'denied' ? styles.tabButtonActive : styles.tabButton), ...tabButtonMobileStyle }}
-            onClick={() => setActiveTab('denied')}
+            style={{ ...(activeTab === 'cancelled' ? styles.tabButtonActive : styles.tabButton), ...tabButtonMobileStyle }}
+            onClick={() => setActiveTab('cancelled')}
           >
-            Cancelled
+            {lang.denied}
           </button>
         </div>
         

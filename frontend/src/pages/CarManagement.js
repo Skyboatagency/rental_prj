@@ -262,15 +262,6 @@ const LanguageSwitcher = ({ language, setLanguage }) => {
       >
         FR
       </button>
-      <button 
-        onClick={() => changeLanguage('ar')} 
-        style={{
-          ...styles.langButton,
-          backgroundColor: language === 'ar' ? '#1890ff' : '#f0f2f5'
-        }}
-      >
-        AR
-      </button>
     </div>
   );
 };

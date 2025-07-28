@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
 import { FaGlobe, FaBell, FaMoneyBillWave } from 'react-icons/fa';
+import { LanguageContext } from '../LanguageContext';
 
 const Preferences = () => {
   // Vérifie si l'utilisateur est connecté
@@ -17,12 +18,7 @@ const Preferences = () => {
   const isLoggedIn = !!user;
   const userName = user ? user.name : '';
 
-  // État pour la langue sélectionnée
-  const [selectedLanguage, setSelectedLanguage] = useState(() => {
-    return localStorage.getItem('language') || 'en';
-  });
-  
-  // États pour le mode sombre / devise
+  // État pour le mode sombre / devise
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currency, setCurrency] = useState('MAD');
 
@@ -185,7 +181,14 @@ const Preferences = () => {
     }
   };
   
-  const lang = texts[selectedLanguage];
+  const { language, setLanguage } = useContext(LanguageContext);
+  const lang = texts[language];
+
+  // Update language and save to localStorage when changed
+  const handleLanguageChange = (e) => {
+    const langCode = e.target.value === 'French' ? 'fr' : 'en';
+    setLanguage(langCode);
+  };
 
   const handleSignOut = () => {
     localStorage.removeItem('user');
@@ -266,8 +269,8 @@ const Preferences = () => {
         isLoggedIn={isLoggedIn}
         userName={userName}
         onSignOut={handleSignOut}
-        selectedLanguage={selectedLanguage}
-        setSelectedLanguage={setSelectedLanguage}
+        selectedLanguage={language}
+        setSelectedLanguage={setLanguage}
         lang={lang}
       />
       <div style={mainWrapperStyle}>
@@ -286,13 +289,12 @@ const Preferences = () => {
             <div style={styles.formGroup}>
               <label style={styles.label}>Language</label>
               <select
-                value={preferredLanguage}
-                onChange={e => setPreferredLanguage(e.target.value)}
+                value={language === 'fr' ? 'French' : 'English'}
+                onChange={handleLanguageChange}
                 style={styles.select}
               >
                 <option value="English">English</option>
                 <option value="French">French</option>
-                <option value="Arabic">Arabic</option>
               </select>
             </div>
           </div>

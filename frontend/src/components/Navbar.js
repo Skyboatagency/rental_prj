@@ -62,7 +62,18 @@ const translations = {
   }
 };
 
-const Navbar = ({ language = 'en', isOpen, setIsOpen }) => {
+const Navbar = ({ language: propLanguage, isOpen, setIsOpen }) => {
+  // Always use the language from localStorage if available, or fallback to prop or 'en'
+  const [language, setLanguage] = React.useState(() => localStorage.getItem('language') || propLanguage || 'en');
+
+  React.useEffect(() => {
+    const handleStorage = () => {
+      setLanguage(localStorage.getItem('language') || 'en');
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {

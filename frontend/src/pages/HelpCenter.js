@@ -209,7 +209,7 @@ const HelpCenter = () => {
   
   // Add WhatsApp redirection function
   const handleWhatsAppClick = () => {
-    const phoneNumber = '+212600000000'; // Replace with your WhatsApp number
+    const phoneNumber = '+212632835968'; // Replace with your WhatsApp number
     const message = encodeURIComponent('Hello, I need help with my booking');
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };

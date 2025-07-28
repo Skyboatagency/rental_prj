@@ -8,6 +8,9 @@ router.get('/:id', userController.getUserById);
 router.post('/login', userController.login);
 router.delete('/:id', userController.deleteUser);
 
+// ADD/ENSURE THIS ROUTE IS PRESENT AND ABOVE OTHERS
+router.put('/:id', userController.updateUserProfile);
+
 router.post('/forgot-password', userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);
 router.post('/verify-code', userController.verifyCode);
@@ -18,6 +21,9 @@ router.post('/register', userController.registerUser);
 
 // Verify user registration
 router.post('/verify', userController.verifyUser);
+
+// DEV ONLY: Set password for a user by email (for testing)
+router.post('/set-password', userController.setPasswordByEmail);
 
 // Get count of active users
 router.get('/active', async (req, res) => {

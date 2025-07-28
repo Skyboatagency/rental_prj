@@ -9,8 +9,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'fbouazi3@gmail.com',
-    pass: 'rgzfplsukpdhtohr' // Remplacez par votre mot de passe d'application Gmail
+    user: 'skyboatagency@gmail.com',
+    pass: 'vvss vdhf cgyv riqs' // Remplacez par votre mot de passe d'application Gmail
   },
   tls: {
     rejectUnauthorized: false
@@ -46,20 +46,27 @@ exports.getAdminById = async (req, res) => {
 // Register new admin
 exports.registerAdmin = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    // Enforce single-admin rule
+    const adminCount = await Admin.count();
+    if (adminCount > 0) {
+      return res.status(403).json({ message: 'An admin already exists. Only one admin is allowed.' });
+    }
+    const normalizedEmail = req.body.email.trim().toLowerCase();
+    const { password } = req.body;
 
     // Vérifier si l'email existe déjà
-    const existingAdmin = await Admin.findOne({ where: { email } });
+    const existingAdmin = await Admin.findOne({ where: { email: normalizedEmail } });
     if (existingAdmin) {
       return res.status(400).json({ message: 'Cet email est déjà utilisé' });
     }
 
     // Générer un code de vérification
     const verificationCode = crypto.randomInt(100000, 999999).toString();
-    verificationCodes.set(email, {
+    verificationCodes.set(normalizedEmail, {
       code: verificationCode,
       data: {
         ...req.body,
+        email: normalizedEmail,
         password: password // Suppression du hachage ici car il est géré par le modèle
       },
       timestamp: Date.now()
@@ -67,8 +74,8 @@ exports.registerAdmin = async (req, res) => {
 
     // Envoyer l'email avec le code
     await transporter.sendMail({
-      from: 'fbouazi3@gmail.com',
-      to: email,
+      from: 'skyboatagency@gmail.com',
+      to: normalizedEmail,
       subject: 'Code de vérification - Inscription Administrateur',
       html: `
         <h1>Bienvenue !</h1>
@@ -87,8 +94,14 @@ exports.registerAdmin = async (req, res) => {
 // Verify admin registration
 exports.verifyAdmin = async (req, res) => {
   try {
-    const { email, code } = req.body;
-    const verificationData = verificationCodes.get(email);
+    // Enforce single-admin rule
+    const adminCount = await Admin.count();
+    if (adminCount > 0) {
+      return res.status(403).json({ message: 'An admin already exists. Only one admin is allowed.' });
+    }
+    const normalizedEmail = req.body.email.trim().toLowerCase();
+    const { code } = req.body;
+    const verificationData = verificationCodes.get(normalizedEmail);
 
     if (!verificationData) {
       return res.status(400).json({ message: 'Code de vérification expiré ou invalide' });
@@ -96,7 +109,7 @@ exports.verifyAdmin = async (req, res) => {
 
     // Vérifier si le code a expiré (10 minutes)
     if (Date.now() - verificationData.timestamp > 10 * 60 * 1000) {
-      verificationCodes.delete(email);
+      verificationCodes.delete(normalizedEmail);
       return res.status(400).json({ message: 'Code de vérification expiré' });
     }
 
@@ -109,7 +122,7 @@ exports.verifyAdmin = async (req, res) => {
     const admin = await Admin.create(verificationData.data);
     
     // Supprimer le code de vérification
-    verificationCodes.delete(email);
+    verificationCodes.delete(normalizedEmail);
 
     res.status(201).json({ message: 'Inscription réussie', admin });
   } catch (error) {
@@ -148,11 +161,12 @@ exports.deleteAdmin = async (req, res) => {
 // Login admin
 exports.loginAdmin = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    console.log('Tentative de connexion pour:', email);
+    const normalizedEmail = req.body.email.trim().toLowerCase();
+    const { password } = req.body;
+    console.log('Tentative de connexion pour:', normalizedEmail);
 
     // Vérifier si l'admin existe
-    const admin = await Admin.findOne({ where: { email } });
+    const admin = await Admin.findOne({ where: { email: normalizedEmail } });
     console.log('Admin trouvé:', admin ? 'Oui' : 'Non');
     
     if (!admin) {
@@ -182,7 +196,7 @@ exports.loginAdmin = async (req, res) => {
       ville: admin.ville
     };
 
-    console.log('Connexion réussie pour:', email);
+    console.log('Connexion réussie pour:', normalizedEmail);
     res.status(200).json(adminData);
   } catch (error) {
     console.error('Erreur détaillée lors de la connexion:', error);

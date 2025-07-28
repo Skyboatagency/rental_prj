@@ -661,7 +661,7 @@ const ContactUs = () => {
       {/* FOOTER */}
       <Footer lang={lang} />
 
-      <WhatsAppButton phoneNumber="+971501231234" message="Hello, I'm interested in renting a car." />
+      <WhatsAppButton phoneNumber="+212632835968" message="Hello, I'm interested in renting a car." />
       <ScrollToTopButton />
     </div>
   );

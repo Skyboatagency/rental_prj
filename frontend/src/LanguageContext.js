@@ -4,17 +4,14 @@ import React, { createContext, useState, useEffect } from 'react';
 export const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  // On peut aussi stocker la langue dans le localStorage pour la persistance
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("selectedLanguage") || "en"
-  );
+  const [language, setLanguage] = useState(() => localStorage.getItem('language') || 'en');
 
   useEffect(() => {
-    localStorage.setItem("selectedLanguage", selectedLanguage);
-  }, [selectedLanguage]);
+    localStorage.setItem('language', language);
+  }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ selectedLanguage, setSelectedLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

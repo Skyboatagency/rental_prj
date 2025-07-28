@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'fbouazi3@gmail.com',
-    pass: 'rgzfplsukpdhtohr' // Remplacez par votre mot de passe d'application Gmail
+    user: 'skyboatagency@gmail.com',
+    pass: 'vvss vdhf cgyv riqs' // Remplacez par votre mot de passe d'application Gmail
   },
   tls: {
     rejectUnauthorized: false
@@ -23,8 +23,18 @@ const verificationCodes = new Map();
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.json(users);
+    // Fetch all users and include their bookings
+    const users = await User.findAll({
+      include: [{ model: Booking, attributes: ['id'] }]
+    });
+    // Map users to include total_bookings
+    const usersWithBookingCount = users.map(user => {
+      const userObj = user.toJSON();
+      userObj.total_bookings = userObj.Bookings ? userObj.Bookings.length : 0;
+      delete userObj.Bookings;
+      return userObj;
+    });
+    res.json(usersWithBookingCount);
   } catch (error) {
     console.error("getAllUsers error:", error);
     res.status(500).json({ message: "Erreur serveur" });
@@ -86,7 +96,8 @@ exports.getUserById = async (req, res) => {
 
 exports.createUser = async (req, res) => {
     try {
-      const existingUser = await User.findOne({ where: { email: req.body.email } });
+      const normalizedEmail = req.body.email.trim().toLowerCase();
+      const existingUser = await User.findOne({ where: { email: normalizedEmail } });
       if (existingUser) {
         return res.status(400).json({ 
           success: false, 
@@ -99,7 +110,7 @@ exports.createUser = async (req, res) => {
       // Inclure le champ phone lors de la création de l'utilisateur
       const user = await User.create({
         name: req.body.name,
-        email: req.body.email,
+        email: normalizedEmail,
         phone: req.body.phone, // Ajouté ici
         password: hashedPassword,
         status: 'active'
@@ -124,7 +135,8 @@ exports.createUser = async (req, res) => {
   
 exports.login = async (req, res) => {
   try {
-    const user = await User.findOne({ where: { email: req.body.email } });
+    const normalizedEmail = req.body.email.trim().toLowerCase();
+    const user = await User.findOne({ where: { email: normalizedEmail } });
     if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
       return res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
@@ -154,9 +166,9 @@ exports.deleteUser = async (req, res) => {
 };
 
 exports.forgotPassword = async (req, res) => {
-  const { email } = req.body;
+  const normalizedEmail = req.body.email.trim().toLowerCase();
   try {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email: normalizedEmail } });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -194,9 +206,10 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 exports.resetPassword = async (req, res) => {
-    const { email, code, newPassword } = req.body;
+    const normalizedEmail = req.body.email.trim().toLowerCase();
+    const { code, newPassword } = req.body;
     try {
-      const user = await User.findOne({ where: { email } });
+      const user = await User.findOne({ where: { email: normalizedEmail } });
       if (!user) {
         return res.status(404).json({
           success: false,
@@ -310,7 +323,7 @@ exports.registerUser = async (req, res) => {
 
     // Envoyer l'email avec le code
     await transporter.sendMail({
-      from: 'fbouazi3@gmail.com',
+      from: 'skyboatagency@gmail.com',
       to: email,
       subject: 'Code de vérification - Inscription Utilisateur',
       html: `
@@ -366,5 +379,51 @@ exports.verifyUser = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+// DEV ONLY: Set password for a user by email (for testing)
+exports.setPasswordByEmail = async (req, res) => {
+  const { email, newPassword } = req.body;
+  if (!email || !newPassword) {
+    return res.status(400).json({ message: "Email and newPassword required" });
+  }
+  try {
+    const normalizedEmail = email.trim().toLowerCase();
+    const user = await User.findOne({ where: { email: normalizedEmail } });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+    res.json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error("setPasswordByEmail error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+exports.updateUserProfile = async (req, res) => {
+  try {
+    const { name, email, phone } = req.body;
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (email && email !== user.email) {
+      const existing = await User.findOne({ where: { email } });
+      if (existing) {
+        return res.status(400).json({ message: "Email already in use" });
+      }
+      user.email = email.trim().toLowerCase();
+    }
+    if (name) user.name = name;
+    if (phone) user.phone = phone;
+    await user.save();
+    res.json({ message: "Profile updated successfully", user });
+  } catch (error) {
+    console.error("updateUserProfile error:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };

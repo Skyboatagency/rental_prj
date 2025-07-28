@@ -12,13 +12,13 @@ import Footer from '../components/Footer';
 const Profile = () => {
   // Récupération de l'utilisateur depuis localStorage
   const storedUser = localStorage.getItem("user");
-  let localUser = null;
+  const localUser = React.useMemo(() => {
   try {
-    localUser = storedUser ? JSON.parse(storedUser) : null;
-  } catch (error) {
-    console.error("Error parsing user data:", error);
-    // Si erreur de parsing, considérer l'utilisateur comme non connecté
-  }
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch {
+      return null;
+    }
+  }, [storedUser]);
 
   // État pour le mode sombre / devise
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -28,14 +28,13 @@ const Profile = () => {
   });
 
   // État pour les informations du profil
-  const [name, setName] = useState(localUser ? localUser.name : '');
-  const [email, setEmail] = useState(localUser ? localUser.email : '');
-  const [phone, setPhone] = useState(localUser ? localUser.phone || '' : '');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [joinDate, setJoinDate] = useState(''); 
+  const [originalProfile, setOriginalProfile] = useState({ name: '', email: '', phone: '' });
 
   // État pour le mode d'édition
-  const [isEditing, setIsEditing] = useState(false);
-
   // URL de l'API
   const API_URL = process.env.REACT_APP_API_URL ;
   
@@ -151,56 +150,42 @@ const Profile = () => {
   const lang = texts[selectedLanguage];
 
   // Récupération des données du profil (et du nombre de rentals)
+  // Fetch profile only once on mount
   useEffect(() => {
-    if (!localUser) {
-      // Si pas connecté, rediriger vers login
-      window.location.href = "/UserLogin";
-      return;
-    }
-
-    // 1) Récupérer l'utilisateur depuis l'API pour avoir la date d'inscription (createdAt)
+    if (!localUser) return;
     axios.get(`${API_URL}/users/${localUser.id}`)
       .then(res => {
         const userData = res.data;
         setName(userData.name);
         setEmail(userData.email);
         setPhone(userData.phone || '');
-
-        // On récupère createdAt et on le formate en "DD.MM.YYYY"
-        if (userData.createdAt) {
-          let dateObj = moment(userData.createdAt).format("DD.MM.YYYY");
-          // Convert Arabic numerals to Western numerals
-          dateObj = dateObj.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
-          setJoinDate(dateObj);
-        } else {
-          setJoinDate('N/A');
-        }
+        // Always display join date in Western numerals
+        let formattedDate = userData.createdAt ? moment(userData.createdAt).format("DD.MM.YYYY") : 'N/A';
+        // Replace Arabic numerals with Western numerals
+        formattedDate = formattedDate.replace(/[٠-٩]/g, d => '0123456789'['٠١٢٣٤٥٦٧٨٩'.indexOf(d)]);
+        setJoinDate(formattedDate);
+        setOriginalProfile({ name: userData.name, email: userData.email, phone: userData.phone || '' });
       })
       .catch(err => {
         console.error("Erreur lors de la récupération du profil :", err);
       });
-  }, [API_URL, localUser]);
+  }, [localUser, API_URL]);
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
+  const hasChanges = name !== originalProfile.name || email !== originalProfile.email || phone !== originalProfile.phone;
 
-  const handleSave = () => {
-    // Mettre à jour le profil via l'API si besoin
-    // axios.put(`${API_URL}/users/${localUser.id}`, { name, email })
-    //   .then(res => {
-    //     alert("Profile updated successfully!");
-    //     // Mettre à jour localStorage si nécessaire
-    //     localStorage.setItem("user", JSON.stringify({ ...localUser, name, email }));
-    //     setIsEditing(false);
-    //   })
-    //   .catch(err => {
-    //     console.error("Erreur lors de la mise à jour du profil :", err);
-    //     alert("Erreur lors de la mise à jour du profil.");
-    //   });
-
-    alert("Profile saved! (Décommentez la requête PUT pour sauvegarder réellement.)");
-    setIsEditing(false);
+  const handleSave = (e) => {
+    if (e) e.preventDefault();
+    if (!hasChanges) return;
+    axios.put(`${API_URL}/users/${localUser.id}`, { name, email, phone })
+      .then(res => {
+        alert("Profile updated successfully!");
+        const updatedUser = { ...localUser, name, email, phone };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        setOriginalProfile({ name, email, phone });
+      })
+      .catch(err => {
+        alert("Error updating profile.");
+      });
   };
 
   const handleDeleteAccount = () => {
@@ -335,13 +320,12 @@ const Profile = () => {
             {/* Account Information Section */}
             <div style={{ marginBottom: 18 }}>
               <h3 style={{ fontSize: 18, fontWeight: 700, color: '#222', margin: '0 0 12px 0', letterSpacing: 0.2 }}>Account Information</h3>
-              <form style={styles.formProfileCard}>
+              <form style={styles.formProfileCard} onSubmit={handleSave}>
                 <label style={styles.labelCard}>{lang.name}</label>
                 <input
                   style={styles.inputCard}
                   type="text"
                   value={name}
-                  disabled={!isEditing}
                   onChange={(e) => setName(e.target.value)}
                 />
                 <label style={styles.labelCard}>{lang.email}</label>
@@ -349,7 +333,6 @@ const Profile = () => {
                   style={styles.inputCard}
                   type="email"
                   value={email}
-                  disabled={!isEditing}
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <label style={styles.labelCard}>Phone</label>
@@ -357,7 +340,6 @@ const Profile = () => {
                   style={styles.inputCard}
                   type="text"
                   value={phone}
-                  disabled={!isEditing}
                   onChange={(e) => setPhone(e.target.value)}
                 />
                 <div style={styles.actionRowCard}>
@@ -366,9 +348,8 @@ const Profile = () => {
                   </span>
                   <button 
                     style={styles.saveButtonCard} 
-                    onClick={handleSave}
-                    disabled={!isEditing}
-                    type="button"
+                    disabled={!hasChanges}
+                    type="submit"
                   >
                     {lang.save}
                   </button>

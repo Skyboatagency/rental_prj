@@ -9,11 +9,7 @@ const validateBookingData = (req, res, next) => {
     'car_id',
     'start_date',
     'end_date',
-    'total_price',
-    'locataire1',
-    'adresse1',
-    'cin1',
-    'permis1'
+    'total_price'
   ];
 
   for (const field of requiredFields) {
@@ -27,6 +23,9 @@ const validateBookingData = (req, res, next) => {
 
 // Route pour récupérer toutes les réservations
 router.get('/', bookingController.getAllBookings);
+
+// Route pour vérifier la disponibilité d'une voiture
+router.post('/check-availability', bookingController.checkAvailability);
 
 // Route pour récupérer une réservation par ID
 router.get('/:id', bookingController.getBookingById);

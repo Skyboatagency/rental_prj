@@ -89,6 +89,52 @@ const texts = {
     chooseDates: "Choose the start and end dates for your car rental.",
     book: "Confirm",
     viewAllCars: "View All Cars",
+    availableNow: "Available Now",
+    availableOn: "Available On",
+    contactForAvailability: "Contact for Availability",
+    reviews: "Reviews",
+    locationNotAvailable: "Location not available",
+    year: "Year",
+    transmission: "Transmission",
+    fuelType: "Fuel Type",
+    seats: "Seats",
+    nextStep: "Next Step",
+    tenant: "Tenant",
+    otherDriver: "Other Driver",
+    addOtherDriver: "Add Other Driver",
+    hideOtherDriver: "Hide Other Driver",
+    fullName: "Full Name",
+    address: "Address",
+    cin: "CIN",
+    licenseNumber: "License Number",
+    back: "Back",
+    confirmBooking: "Confirm Booking",
+    bookingInfo: "Booking Information",
+    car: "Car",
+    place: "Place",
+    dates: "Dates",
+    totalPrice: "Total Price",
+    notAvailable: "Not Available",
+    filterPrice: "Filter Price",
+    fuelTypeFilter: "Fuel Type Filter",
+    transmissionFilter: "Transmission Filter",
+    seatsFilter: "Seats Filter",
+    city: "City",
+    sortBy: "Sort By",
+    lowerToHigh: "Lower to High",
+    higherToLow: "Higher to Low",
+    itemsFound: "Items Found",
+    clearAllFilters: "Clear All Filters",
+    seats2: "2 Seats",
+    seats5: "5 Seats",
+    seats7: "7 Seats",
+    automatic: "Automatic",
+    manual: "Manual",
+    petrol: "Petrol",
+    diesel: "Diesel",
+    hybrid: "Hybrid",
+    electric: "Electric",
+    day: "Day",
   },
   fr: {
     navHome: "Accueil",
@@ -158,6 +204,52 @@ const texts = {
     chooseDates: "Choisissez les dates de début et de fin pour votre location.",
     book: "Confirmer",
     viewAllCars: "Voir toutes les voitures",
+    availableNow: "Disponible maintenant",
+    availableOn: "Disponible le",
+    contactForAvailability: "Contactez-nous pour la disponibilité",
+    reviews: "Avis",
+    locationNotAvailable: "Lieu non disponible",
+    year: "Année",
+    transmission: "Transmission",
+    fuelType: "Carburant",
+    seats: "Places",
+    nextStep: "Étape suivante",
+    tenant: "Locataire",
+    otherDriver: "Autre conducteur (Optionnel)",
+    addOtherDriver: "Ajouter Autre Conducteur",
+    hideOtherDriver: "Masquer Autre Conducteur",
+    fullName: "Nom complet",
+    address: "Adresse",
+    cin: "CIN",
+    licenseNumber: "Numéro de permis",
+    back: "Retour",
+    confirmBooking: "Confirmer la réservation",
+    bookingInfo: "Informations de réservation",
+    car: "Voiture",
+    place: "Lieu",
+    dates: "Dates",
+    totalPrice: "Prix total",
+    notAvailable: "Non disponible",
+    filterPrice: "Filtrer par prix",
+    fuelTypeFilter: "Type de carburant",
+    transmissionFilter: "Transmission",
+    seatsFilter: "Places",
+    city: "Ville",
+    sortBy: "Trier par",
+    lowerToHigh: "Du moins cher au plus cher",
+    higherToLow: "Du plus cher au moins cher",
+    itemsFound: "Éléments trouvés",
+    clearAllFilters: "Effacer tous les filtres",
+    seats2: "2 places",
+    seats5: "5 places",
+    seats7: "7 places",
+    automatic: "Automatique",
+    manual: "Manuelle",
+    petrol: "Essence",
+    diesel: "Diesel",
+    hybrid: "Hybride",
+    electric: "Électrique",
+    day: "Jour",
   },
   ar: {
     navHome: "الرئيسية",
@@ -227,6 +319,52 @@ const texts = {
     chooseDates: "اختر تواريخ البداية والنهاية لاستئجار سيارتك.",
     book: "تأكيد",
     viewAllCars: "مشاهدة كل السيارات",
+    availableNow: "متاح الآن",
+    availableOn: "متاح على",
+    contactForAvailability: "اتصل بنا للتحقق من التوفر",
+    reviews: "تقييمات",
+    locationNotAvailable: "الموقع غير متاح",
+    year: "السنة",
+    transmission: "ناقل الحركة",
+    fuelType: "نوع الوقود",
+    seats: "عدد المقاعد",
+    nextStep: "الخطوة التالية",
+    tenant: "المستأجر",
+    otherDriver: "السائق الآخر (اختياري)",
+    addOtherDriver: "إضافة سائق آخر",
+    hideOtherDriver: "إخفاء سائق آخر",
+    fullName: "الاسم الكامل",
+    address: "العنوان",
+    cin: "رقم الهوية الوطنية",
+    licenseNumber: "رقم رخصة القيادة",
+    back: "رجوع",
+    confirmBooking: "تأكيد الحجز",
+    bookingInfo: "معلومات الحجز",
+    car: "السيارة",
+    place: "المكان",
+    dates: "التواريخ",
+    totalPrice: "السعر الكلي",
+    notAvailable: "غير متاح",
+    filterPrice: "تصفية السعر",
+    fuelTypeFilter: "نوع الوقود",
+    transmissionFilter: "ناقل الحركة",
+    seatsFilter: "عدد المقاعد",
+    city: "المدينة",
+    sortBy: "ترتيب حسب",
+    lowerToHigh: "من الأقل إلى الأعلى",
+    higherToLow: "من الأعلى إلى الأقل",
+    itemsFound: "عناصر موجودة",
+    clearAllFilters: "مسح جميع المرشحات",
+    seats2: "مقاعد 2",
+    seats5: "مقاعد 5",
+    seats7: "مقاعد 7",
+    automatic: "أوتوماتيك",
+    manual: "يدوي",
+    petrol: "بنزين",
+    diesel: "ديزل",
+    hybrid: "هايبرد",
+    electric: "كهرباء",
+    day: "يوم",
   }
 };
 
@@ -548,9 +686,9 @@ const AvailableCar = () => {
             opacity: 1,
             display: 'block'
           }}>
-            {isAvailable ? 'Disponible maintenant' : 
-              nextAvailableDate ? `Disponible le ${moment(nextAvailableDate).format('DD/MM/YYYY')}` : 
-              'Contactez-nous pour la disponibilité'}
+            {isAvailable ? lang.availableNow : 
+              nextAvailableDate ? `${lang.availableOn} ${moment(nextAvailableDate).format('DD/MM/YYYY')}` : 
+              lang.contactForAvailability}
           </div>
           <div style={styles.mobileImageWrapper}>
             <img
@@ -592,7 +730,7 @@ const AvailableCar = () => {
               <span>{car.seats} {lang.seats}</span>
             </div>
             <div style={styles.priceText}>
-              {convertPrice(car.price_per_day)} {getCurrencySymbol()} <span style={styles.priceLabel}>/ Day{lang.day}</span>
+              {convertPrice(car.price_per_day)} {getCurrencySymbol()} / {lang.day}
             </div>
             <button
               style={styles.mobileBookButton}
@@ -642,9 +780,9 @@ const AvailableCar = () => {
           opacity: 1,
           display: 'block'
         }}>
-          {isAvailable ? 'Disponible maintenant' : 
-            nextAvailableDate ? `Disponible le ${moment(nextAvailableDate).format('DD/MM/YYYY')}` : 
-            'Contactez-nous pour la disponibilité'}
+          {isAvailable ? lang.availableNow : 
+            nextAvailableDate ? `${lang.availableOn} ${moment(nextAvailableDate).format('DD/MM/YYYY')}` : 
+            lang.contactForAvailability}
         </div>
 
         <div style={styles.desktopImageWrapper}>
@@ -705,7 +843,7 @@ const AvailableCar = () => {
           {/* Price and booking */}
           <div style={styles.priceBookRow}>
             <div style={styles.priceDisplay}>
-              <span style={styles.priceValue}>{convertPrice(car.price_per_day)} {getCurrencySymbol()} / Day{lang.day}</span>
+              <span style={styles.priceValue}>{convertPrice(car.price_per_day)} {getCurrencySymbol()} / {lang.day}</span>
             </div>
             
             <button
@@ -816,7 +954,7 @@ Pourriez-vous confirmer la disponibilité pour finaliser cette réservation ? �
 
 Merci d'avance !`;
       
-      const whatsappURL = `https://web.whatsapp.com/send?phone=212770256968&text=${encodeURIComponent(message)}&app_absent=0`;
+      const whatsappURL = `https://web.whatsapp.com/send?phone=212632835968&text=${encodeURIComponent(message)}&app_absent=0`;
       window.open(whatsappURL, '_blank');
       setBookingModalOpen(false);
       setCurrentStep(1);
@@ -978,12 +1116,12 @@ Merci d'avance !`;
                   borderBottom: '1px solid #eee',
                   width: '100%',
                 }}>
-                  Estimated price : {convertPrice(totalPrice)}{getCurrencySymbol()}
+                  {lang.estimatedPrice} : {convertPrice(totalPrice)}{getCurrencySymbol()}
                 </div>
               ) : (
                 <div style={styles.newPriceContainer}>
                   <p style={styles.newPriceText}>
-                    Estimated price : {convertPrice(totalPrice)}{getCurrencySymbol()}
+                    {lang.estimatedPrice} : {convertPrice(totalPrice)}{getCurrencySymbol()}
                   </p>
                 </div>
               )}
@@ -1037,7 +1175,7 @@ Merci d'avance !`;
                     : styles.newLocationRow
                 }>
                   <FaMapMarkerAlt style={styles.newLocationIcon} />
-                  <span>{selectedCar.location || 'Location not available'}</span>
+                  <span>{selectedCar.location || lang.locationNotAvailable}</span>
                 </div>
               </div>
               <div style={
@@ -1061,25 +1199,25 @@ Merci d'avance !`;
                 <div style={styles.newSpecItem}>
                   <FaCalendarAlt style={styles.newSpecIcon} />
                   <span>
-                    <strong>Year : </strong> {selectedCar.year || 'Not available'}
+                    <strong>{lang.year}: </strong> {selectedCar.year || lang.notAvailable}
                   </span>
                 </div>
                 <div style={styles.newSpecItem}>
                   <FaCog style={styles.newSpecIcon} />
                   <span>
-                    <strong>Transmission : </strong> {selectedCar.transmission || 'Not available'}
+                    <strong>{lang.transmission}: </strong> {selectedCar.transmission || lang.notAvailable}
                   </span>
                 </div>
                 <div style={styles.newSpecItem}>
                   <FaGasPump style={styles.newSpecIcon} />
                   <span>
-                    <strong>Fuel Type : </strong> {selectedCar.fuel_type || 'Not available'}
+                    <strong>{lang.fuelType}: </strong> {selectedCar.fuel_type || lang.notAvailable}
                   </span>
                 </div>
                 <div style={styles.newSpecItem}>
                   <FaUsers style={styles.newSpecIcon} />
                   <span>
-                    <strong>Seats : </strong> {selectedCar.seats ? `${selectedCar.seats}` : 'Not available'}
+                    <strong>{lang.seats}: </strong> {selectedCar.seats ? `${selectedCar.seats}` : lang.notAvailable}
                   </span>
                 </div>
               </div>
@@ -1110,7 +1248,7 @@ Merci d'avance !`;
                           fontSize: isMobile ? 11 : 14,
                           marginTop: isMobile ? 4 : 8,
                         }}>
-                          {stepIndex === 1 ? 'Dates' : stepIndex === 2 ? 'Locataires' : 'Confirmation'}
+                          {stepIndex === 1 ? lang.dates : stepIndex === 2 ? lang.tenant : lang.confirmation}
                         </div>
                       </div>
                       {stepIndex < 3 && (
@@ -1150,7 +1288,7 @@ Merci d'avance !`;
                         color: bookingData.start_date ? '#000' : '#666',
                         fontWeight: bookingData.start_date ? '500' : 'normal'
                       }}>
-                        {bookingData.start_date ? formatDateInEnglish(bookingData.start_date) : 'Start Date'}
+                        {bookingData.start_date ? formatDateInEnglish(bookingData.start_date) : lang.startDate}
                       </span>
                     </div>
                     <span style={{ ...styles.newDateArrow, fontSize: isMobile ? '13px' : '16px' }}>→</span>
@@ -1166,7 +1304,7 @@ Merci d'avance !`;
                         color: bookingData.end_date ? '#000' : '#666',
                         fontWeight: bookingData.end_date ? '500' : 'normal'
                       }}>
-                        {bookingData.end_date ? formatDateInEnglish(bookingData.end_date) : 'End Date'}
+                        {bookingData.end_date ? formatDateInEnglish(bookingData.end_date) : lang.endDate}
                       </span>
                     </div>
                   </div>
@@ -1201,7 +1339,7 @@ Merci d'avance !`;
                     }}
                     disabled={!bookingData.start_date || !bookingData.end_date}
                   >
-                    Next Step
+                    {lang.nextStep}
                   </button>
                 </div>
               )}
@@ -1209,39 +1347,39 @@ Merci d'avance !`;
               {/* Step 2: Tenant Information */}
               {currentStep === 2 && (
                 <div style={styles.tenantInfoContainer}>
-                  <h3 style={styles.tenantInfoTitle}>Locataire</h3>
+                  <h3 style={styles.tenantInfoTitle}>{lang.tenant}</h3>
                   <div style={styles.inputGroup}>
                     <input
                       type="text"
-                      placeholder="Nom complet"
+                      placeholder={lang.fullName}
                       value={bookingData.locataire1}
                       onChange={(e) => setBookingData({...bookingData, locataire1: e.target.value})}
                       style={styles.input}
                     />
                     <input
                       type="text"
-                      placeholder="Adresse"
+                      placeholder={lang.address}
                       value={bookingData.adresse1}
                       onChange={(e) => setBookingData({...bookingData, adresse1: e.target.value})}
                       style={styles.input}
                     />
                     <input
                       type="text"
-                      placeholder="CIN"
+                      placeholder={lang.cin}
                       value={bookingData.cin1}
                       onChange={(e) => setBookingData({...bookingData, cin1: e.target.value})}
                       style={styles.input}
                     />
                     <input
                       type="text"
-                      placeholder="Numéro de permis"
+                      placeholder={lang.licenseNumber}
                       value={bookingData.permis1}
                       onChange={(e) => setBookingData({...bookingData, permis1: e.target.value})}
                       style={styles.input}
                     />
                   </div>
                   <div style={{display: 'flex', alignItems: 'center', gap: 8, marginTop: 20}}>
-                    <h3 style={styles.tenantInfoTitle}>Autre Conducteur (Optionnel)</h3>
+                    <h3 style={styles.tenantInfoTitle}>{lang.otherDriver}</h3>
                     {!showTenant2 && (
                       <button
                         type="button"
@@ -1259,7 +1397,7 @@ Merci d'avance !`;
                           marginLeft: 8,marginTop:-10
                         }}
                         onClick={() => setShowTenant2(true)}
-                        aria-label="Ajouter Autre Conducteur"
+                        aria-label={lang.addOtherDriver}
                       >
                         <FaPlus />
                       </button>
@@ -1281,7 +1419,7 @@ Merci d'avance !`;
                           marginLeft: 8
                         }}
                         onClick={() => setShowTenant2(false)}
-                        aria-label="Masquer Autre Conducteur"
+                        aria-label={lang.hideOtherDriver}
                       >
                         <FaMinus />
                       </button>
@@ -1291,28 +1429,28 @@ Merci d'avance !`;
                     <div style={styles.inputGroup}>
                       <input
                         type="text"
-                        placeholder="Nom complet"
+                        placeholder={lang.fullName}
                         value={bookingData.locataire2}
                         onChange={(e) => setBookingData({...bookingData, locataire2: e.target.value})}
                         style={styles.input}
                       />
                       <input
                         type="text"
-                        placeholder="Adresse"
+                        placeholder={lang.address}
                         value={bookingData.adresse2}
                         onChange={(e) => setBookingData({...bookingData, adresse2: e.target.value})}
                         style={styles.input}
                       />
                       <input
                         type="text"
-                        placeholder="CIN"
+                        placeholder={lang.cin}
                         value={bookingData.cin2}
                         onChange={(e) => setBookingData({...bookingData, cin2: e.target.value})}
                         style={styles.input}
                       />
                       <input
                         type="text"
-                        placeholder="Numéro de permis"
+                        placeholder={lang.licenseNumber}
                         value={bookingData.permis2}
                         onChange={(e) => setBookingData({...bookingData, permis2: e.target.value})}
                         style={styles.input}
@@ -1324,7 +1462,7 @@ Merci d'avance !`;
                       style={styles.backButton}
                       onClick={() => setCurrentStep(1)}
                     >
-                      Back
+                      {lang.back}
                     </button>
                     <button 
                       style={{
@@ -1334,7 +1472,7 @@ Merci d'avance !`;
                       onClick={() => setCurrentStep(3)}
                       disabled={!bookingData.locataire1 || !bookingData.adresse1 || !bookingData.cin1 || !bookingData.permis1}
                     >
-                      Next Step
+                      {lang.nextStep}
                     </button>
                   </div>
                 </div>
@@ -1347,33 +1485,33 @@ Merci d'avance !`;
                     {/* Titre principal */}
                     <div style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: 20, color: '#222', marginBottom: 18, textAlign: 'left', paddingLeft: 12 }}>
                       <FaMinus style={{ fontSize: 14, color: '#222', marginRight: 8 }} />
-                      Informations de réservation :
+                      {lang.bookingInfo} :
                     </div>
                     {/* Sous-titres réservation */}
-                    <div style={{ marginBottom: 8, textAlign: 'left', fontSize: isMobile ? 13 : 15 }}><b>Voiture :</b> {selectedCar.name ? selectedCar.name.toUpperCase() : ''} - {selectedCar.model}</div>
-                    <div style={{ marginBottom: 8, textAlign: 'left', fontSize: isMobile ? 13 : 15 }}><b>Lieu :</b> {selectedCar.location}</div>
-                    <div style={{ marginBottom: 8, textAlign: 'left', fontSize: isMobile ? 13 : 15 }}><b>Dates :</b> {bookingData.start_date ? formatDateInEnglish(bookingData.start_date) : ''} → {bookingData.end_date ? formatDateInEnglish(bookingData.end_date) : ''}</div>
-                    <div style={{ marginBottom: 18, textAlign: 'left' }}><b>Prix total :</b> {convertPrice(totalPrice)} {getCurrencySymbol()}</div>
+                    <div style={{ marginBottom: 8, textAlign: 'left', fontSize: isMobile ? 13 : 15 }}><b>{lang.car}:</b> {selectedCar.name ? selectedCar.name.toUpperCase() : ''} - {selectedCar.model}</div>
+                    <div style={{ marginBottom: 8, textAlign: 'left', fontSize: isMobile ? 13 : 15 }}><b>{lang.place}:</b> {selectedCar.location}</div>
+                    <div style={{ marginBottom: 8, textAlign: 'left', fontSize: isMobile ? 13 : 15 }}><b>{lang.dates}:</b> {bookingData.start_date ? formatDateInEnglish(bookingData.start_date) : ''} → {bookingData.end_date ? formatDateInEnglish(bookingData.end_date) : ''}</div>
+                    <div style={{ marginBottom: 18, textAlign: 'left' }}><b>{lang.totalPrice}:</b> {convertPrice(totalPrice)} {getCurrencySymbol()}</div>
                     {/* Titre Locataire */}
                     <div style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: 20, color: '#222', margin: '24px 0 12px 0', textAlign: 'left', paddingLeft: 12 }}>
                       <FaMinus style={{ fontSize: 14, color: '#222', marginRight: 8 }} />
-                      Locataire
+                      {lang.tenant}
                     </div>
-                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Nom :</b> {bookingData.locataire1}</div>
-                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Adresse :</b> {bookingData.adresse1}</div>
-                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>CIN :</b> {bookingData.cin1}</div>
-                    <div style={{ marginBottom: 18, textAlign: 'left' }}><b>Permis :</b> {bookingData.permis1}</div>
+                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.fullName}:</b> {bookingData.locataire1}</div>
+                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.address}:</b> {bookingData.adresse1}</div>
+                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.cin}:</b> {bookingData.cin1}</div>
+                    <div style={{ marginBottom: 18, textAlign: 'left' }}><b>{lang.licenseNumber}:</b> {bookingData.permis1}</div>
                     {/* Autre Conducteur si présent */}
                     {bookingData.locataire2 && (
                       <>
                         <div style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: 20, color: '#222', margin: '24px 0 12px 0', textAlign: 'left', paddingLeft: 12 }}>
                           <FaMinus style={{ fontSize: 14, color: '#222', marginRight: 8 }} />
-                          Autre Conducteur
+                          {lang.otherDriver}
                         </div>
-                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Nom :</b> {bookingData.locataire2}</div>
-                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Adresse :</b> {bookingData.adresse2}</div>
-                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>CIN :</b> {bookingData.cin2}</div>
-                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Permis :</b> {bookingData.permis2}</div>
+                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.fullName}:</b> {bookingData.locataire2}</div>
+                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.address}:</b> {bookingData.adresse2}</div>
+                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.cin}:</b> {bookingData.cin2}</div>
+                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.licenseNumber}:</b> {bookingData.permis2}</div>
                       </>
                     )}
                   </div>
@@ -1382,13 +1520,13 @@ Merci d'avance !`;
                       style={styles.backButton}
                       onClick={() => setCurrentStep(2)}
                     >
-                      Back
+                      {lang.back}
                     </button>
                     <button 
                       style={styles.newConfirmButton}
                       onClick={handleBooking}
                     >
-                      Confirm Booking
+                      {lang.confirmBooking}
                     </button>
                   </div>
                 </div>
@@ -2076,7 +2214,7 @@ Merci d'avance !`;
                 <h3 style={{
                   ...styles.filterTitle,
                   fontSize: isMobile ? '14px' : '16px'
-                }}>Show on map</h3>
+                }}>{lang.showOnMap}</h3>
                 <FaChevronDown style={{
                   transition: 'transform 0.3s',
                   transform: openFilters.map ? 'rotate(0deg)' : 'rotate(-90deg)'
@@ -2106,7 +2244,7 @@ Merci d'avance !`;
                 <h3 style={{
                   ...styles.filterTitle,
                   fontSize: isMobile ? '14px' : '16px'
-                }}>Filter Price</h3>
+                }}>{lang.filterPrice}</h3>
                 <FaChevronDown style={{
                   transition: 'transform 0.3s',
                   transform: openFilters.price ? 'rotate(0deg)' : 'rotate(-90deg)'
@@ -2136,7 +2274,7 @@ Merci d'avance !`;
                       fontSize: isMobile ? '12px' : '14px',
                       padding: isMobile ? '6px 10px' : '8px 12px'
                     }}>
-                      <FaTimes style={{ marginRight: 5 }} /> Clear
+                      <FaTimes style={{ marginRight: 5 }} /> {lang.clear}
                     </button>
                   </div>
                 </>
@@ -2152,7 +2290,7 @@ Merci d'avance !`;
                 <h3 style={{
                   ...styles.filterTitle,
                   fontSize: isMobile ? '14px' : '16px'
-                }}>Fuel Type</h3>
+                }}>{lang.fuelTypeFilter}</h3>
                 <FaChevronDown style={{
                   transition: 'transform 0.3s',
                   transform: openFilters.fuel ? 'rotate(0deg)' : 'rotate(-90deg)'
@@ -2269,7 +2407,7 @@ Merci d'avance !`;
                 <h3 style={{
                   ...styles.filterTitle,
                   fontSize: isMobile ? '14px' : '16px'
-                }}>Transmission</h3>
+                }}>{lang.transmissionFilter}</h3>
                 <FaChevronDown style={{
                   transition: 'transform 0.3s',
                   transform: openFilters.transmission ? 'rotate(0deg)' : 'rotate(-90deg)'
@@ -2338,7 +2476,7 @@ Merci d'avance !`;
                 <h3 style={{
                   ...styles.filterTitle,
                   fontSize: isMobile ? '14px' : '16px'
-                }}>Seats</h3>
+                }}>{lang.seatsFilter}</h3>
                 <FaChevronDown style={{
                   transition: 'transform 0.3s',
                   transform: openFilters.seats ? 'rotate(0deg)' : 'rotate(-90deg)'
@@ -2362,7 +2500,7 @@ Merci d'avance !`;
                       ...styles.checkboxLabel,
                       fontSize: isMobile ? '12px' : '14px'
                     }}>
-                      2 Seats
+                      {lang.seats2}
                       <span style={{
                         ...styles.countBadge,
                         fontSize: isMobile ? '10px' : '12px',
@@ -2386,7 +2524,7 @@ Merci d'avance !`;
                       ...styles.checkboxLabel,
                       fontSize: isMobile ? '12px' : '14px'
                     }}>
-                      5 Seats
+                      {lang.seats5}
                       <span style={{
                         ...styles.countBadge,
                         fontSize: isMobile ? '10px' : '12px',
@@ -2410,7 +2548,7 @@ Merci d'avance !`;
                       ...styles.checkboxLabel,
                       fontSize: isMobile ? '12px' : '14px'
                     }}>
-                      7 Seats
+                      {lang.seats7}
                       <span style={{
                         ...styles.countBadge,
                         fontSize: isMobile ? '10px' : '12px',
@@ -2431,7 +2569,7 @@ Merci d'avance !`;
                 <h3 style={{
                   ...styles.filterTitle,
                   fontSize: isMobile ? '14px' : '16px'
-                }}>City</h3>
+                }}>{lang.city}</h3>
                 <FaChevronDown style={{
                   transition: 'transform 0.3s',
                   transform: openFilters.city ? 'rotate(0deg)' : 'rotate(-90deg)'
@@ -2493,22 +2631,22 @@ Merci d'avance !`;
                         width: isMobile ? '100%' : 'auto',
                 }}>
                   <div style={styles.sortByContainer}>
-                    <span style={styles.sortByLabel}>Sort by:</span>
+                    <span style={styles.sortByLabel}>{lang.sortBy}:</span>
                     <div style={styles.sortByValue}>
-                      <span>{sortValue === 'lowest' ? 'Lower to High' : 'Higher to Low'}</span>
+                      <span>{sortValue === 'lowest' ? lang.lowerToHigh : lang.higherToLow}</span>
                       <FaChevronDown style={styles.sortIcon} />
                     </div>
                   </div>
                  
                   <div style={styles.itemsFoundContainer}>
                     <FaList style={styles.listIcon} />
-                    <span style={styles.itemsFoundText}>{displayedCars.length} items found</span>
+                    <span style={styles.itemsFoundText}>{displayedCars.length} {lang.itemsFound}</span>
                   </div>
                   <button 
                     onClick={handleClearAllFilters} 
                     style={styles.clearAllFiltersBtn}
                   >
-                    Clear All Filters
+                    {lang.clearAllFilters}
                   </button>
                 </div>
               </div>
@@ -2535,24 +2673,8 @@ Merci d'avance !`;
       </div>
       
       <WhatsAppButton 
-        phoneNumber="+212770256968" 
-        message="🚗 Car Rental Request
-
-Hello,
-
-I would like to book a car with the following details:
-
-🔹 Customer name: farid bouazi
-📞 Contact number: 0645473763
-📍 Return location: Rabat Airport
-📅 Start date: 23 Apr 2025
-📅 End date: 04 May 2025
-🚘 Vehicle model: D - d
-💰 Total price: 600.00 MAD
-
-Could you please confirm availability to finalize this reservation? ✅
-
-Thank you in advance!" 
+        phoneNumber="+212632835968" 
+        message=" Hello, I'm interested in renting a car." 
       />
       <ScrollToTopButton />
     </div>

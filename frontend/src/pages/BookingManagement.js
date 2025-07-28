@@ -122,6 +122,66 @@ const translations = {
       en: "Logout",
       ar: "تسجيل الخروج"
     }
+  },
+  user: {
+    fr: "Utilisateur",
+    en: "User",
+    ar: "المستخدم"
+  },
+  car: {
+    fr: "Voiture",
+    en: "Car",
+    ar: "السيارة"
+  },
+  pricePerDay: {
+    fr: "Prix/Jour",
+    en: "Price/Day",
+    ar: "السعر لليوم"
+  },
+  startDate: {
+    fr: "Date de début",
+    en: "Start Date",
+    ar: "تاريخ البدء"
+  },
+  endDate: {
+    fr: "Date de fin",
+    en: "End Date",
+    ar: "تاريخ الانتهاء"
+  },
+  price: {
+    fr: "Prix total",
+    en: "Price (MAD)",
+    ar: "السعر الإجمالي"
+  },
+  status: {
+    fr: "Statut",
+    en: "Status",
+    ar: "الحالة"
+  },
+  actions: {
+    fr: "Actions",
+    en: "Actions",
+    ar: "الإجراءات"
+  },
+  contract: {
+    fr: "Contrat",
+    en: "Contract",
+    ar: "العقد"
+  },
+  completed: {
+    fr: "Terminé",
+    en: "Completed",
+    ar: "مكتمل"
+  },
+  cancelled: {
+    fr: "Annulé",
+    en: "Cancelled",
+    ar: "ملغى"
+  },
+  noBookingsFound: {
+    fr: "Aucune réservation trouvée",
+    en: "No bookings found",
+    ar: "لم يتم العثور على حجوزات"
   }
 };
 
@@ -210,6 +270,13 @@ const BookingManagement = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [addForm, setAddForm] = useState({ user_id: '', other_user_name: '', car_id: '', start_date: '', end_date: '', total_price: '', locataire1: '', adresse1: '', cin1: '', permis1: '', locataire2: '', adresse2: '', cin2: '', permis2: '', phone: '' });
+  const [addLoading, setAddLoading] = useState(false);
+  const [addError, setAddError] = useState('');
+  const [availabilityStatus, setAvailabilityStatus] = useState({ available: true, message: '', loading: false });
+  const [users, setUsers] = useState([]);
+  const [cars, setCars] = useState([]);
   const API_URL = process.env.REACT_APP_API_URL;
 
   // Responsive: detect mobile
@@ -274,6 +341,13 @@ const BookingManagement = () => {
   const renderUserName = (booking) => {
     if (booking.User) {
       return booking.User.name;
+    }
+    // Handle "Other" user case
+    if (booking.other_user_name) {
+      return booking.other_user_name;
+    }
+    if (booking.displayName) {
+      return booking.displayName;
     }
     return 'Unknown User';
   };
@@ -648,10 +722,257 @@ const BookingManagement = () => {
     }
   };
 
+  // Add Booking handler
+  const handleAddBooking = async (e) => {
+    e.preventDefault();
+    setAddLoading(true);
+    setAddError('');
+    
+    // Check if car is available before submitting
+    if (!availabilityStatus.available) {
+      setAddError('Cannot create booking: ' + availabilityStatus.message);
+      setAddLoading(false);
+      return;
+    }
+    
+    try {
+      // Calculate total_price if not provided
+      let total_price = addForm.total_price;
+      if (!total_price && addForm.start_date && addForm.end_date && addForm.car_id) {
+        const start = new Date(addForm.start_date);
+        const end = new Date(addForm.end_date);
+        const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+        // Fetch car price
+        const carRes = await axios.get(`${API_URL}/cars/${addForm.car_id}`);
+        const pricePerDay = carRes.data.price_per_day || 0;
+        total_price = days * pricePerDay;
+      }
+      
+      // Prepare booking data
+      const bookingData = {
+        ...addForm,
+        total_price,
+        status: 'approved',
+        phone: addForm.user_id === 'other' ? addForm.phone : undefined,
+      };
+      
+      console.log('Frontend - Data being sent to backend:', bookingData);
+      
+      // POST booking
+      const res = await axios.post(`${API_URL}/bookings`, bookingData);
+      
+      console.log('Frontend - Response from backend:', res.data);
+      
+      // Optimistically add to state
+      let newBooking = res.data;
+      if (!newBooking || !newBooking.id) {
+        // If backend does not return the created booking, construct a complete one
+        const selectedCar = cars.find(c => String(c.id) === String(addForm.car_id));
+        const selectedUser = addForm.user_id === 'other' ? 
+          { id: Date.now(), name: addForm.other_user_name, phone: addForm.phone } : 
+          users.find(u => String(u.id) === String(addForm.user_id));
+        
+        newBooking = {
+          ...addForm,
+          id: Date.now(), // temp id
+          total_price,
+          status: 'approved',
+          Car: selectedCar,
+          User: selectedUser,
+        };
+      }
+      
+      // Ensure the booking has the correct status
+      newBooking.status = 'approved';
+      
+      console.log('Adding new booking:', newBooking); // Debug log
+      
+      setBookings(prev => [newBooking, ...prev]);
+      setFilteredBookings(prev => [newBooking, ...prev]);
+      
+      setShowAddModal(false);
+      setAddForm({ user_id: '', other_user_name: '', car_id: '', start_date: '', end_date: '', total_price: '', locataire1: '', adresse1: '', cin1: '', permis1: '', locataire2: '', adresse2: '', cin2: '', permis2: '', phone: '' });
+      setAvailabilityStatus({ available: true, message: '', loading: false });
+      
+      // Refresh from backend to ensure consistency
+      fetchBookings();
+    } catch (err) {
+      console.error('Error adding booking:', err);
+      
+      // Handle availability error specifically
+      if (err.response && err.response.data && err.response.data.error === 'Car is already booked for these dates') {
+        const details = err.response.data.details;
+        setAddError(`Car is already booked by ${details.conflictingUser} from ${details.conflictingStartDate} to ${details.conflictingEndDate}`);
+      } else {
+        setAddError('Error adding booking: ' + (err.response?.data?.error || err.message));
+      }
+    }
+    setAddLoading(false);
+  };
+
+  // Fetch users and cars when modal opens
+  useEffect(() => {
+    if (showAddModal) {
+      axios.get(`${API_URL}/users`).then(res => setUsers(res.data)).catch(() => setUsers([]));
+      axios.get(`${API_URL}/cars`).then(res => setCars(res.data)).catch(() => setCars([]));
+      // Reset availability status when modal opens
+      setAvailabilityStatus({ available: true, message: '', loading: false });
+    }
+  }, [showAddModal, API_URL]);
+
+  // Calculate total price automatically when car, start_date, or end_date changes
+  useEffect(() => {
+    if (addForm.car_id && addForm.start_date && addForm.end_date) {
+      const car = cars.find(c => String(c.id) === String(addForm.car_id));
+      if (car && car.price_per_day) {
+        const start = new Date(addForm.start_date);
+        const end = new Date(addForm.end_date);
+        if (!isNaN(start) && !isNaN(end) && end >= start) {
+          const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+          const total = days * car.price_per_day;
+          setAddForm(f => ({ ...f, total_price: total }));
+          
+          // Check availability
+          checkAvailability(addForm.car_id, addForm.start_date, addForm.end_date);
+        }
+      }
+    }
+  }, [addForm.car_id, addForm.start_date, addForm.end_date, cars]);
+
+  // Function to check car availability
+  const checkAvailability = async (carId, startDate, endDate) => {
+    if (!carId || !startDate || !endDate) {
+      setAvailabilityStatus({ available: true, message: '', loading: false });
+      return;
+    }
+
+    setAvailabilityStatus({ available: true, message: '', loading: true });
+    
+    try {
+      const response = await axios.post(`${API_URL}/bookings/check-availability`, {
+        car_id: carId,
+        start_date: startDate,
+        end_date: endDate
+      });
+      
+      if (response.data.available) {
+        setAvailabilityStatus({ 
+          available: true, 
+          message: 'Car is available for these dates', 
+          loading: false 
+        });
+      } else {
+        const conflicting = response.data.conflictingBookings[0];
+        const message = `Car is already booked by ${conflicting.User?.name || 'Unknown User'} from ${new Date(conflicting.start_date).toLocaleDateString()} to ${new Date(conflicting.end_date).toLocaleDateString()}`;
+        setAvailabilityStatus({ 
+          available: false, 
+          message: message, 
+          loading: false 
+        });
+      }
+    } catch (error) {
+      console.error('Error checking availability:', error);
+      setAvailabilityStatus({ 
+        available: false, // treat as unavailable if we can't check
+        message: 'Could not check availability', 
+        loading: false 
+      });
+    }
+  };
+
+  // Function to close modal and reset form
+  const handleCloseModal = () => {
+    setShowAddModal(false);
+    setAddForm({ user_id: '', other_user_name: '', car_id: '', start_date: '', end_date: '', total_price: '', locataire1: '', adresse1: '', cin1: '', permis1: '', locataire2: '', adresse2: '', cin2: '', permis2: '', phone: '' });
+    setAvailabilityStatus({ available: true, message: '', loading: false });
+    setAddError('');
+  };
+
   return (
     <div style={styles.container}>
       <Navbar language={language} isOpen={isOpen} setIsOpen={setIsOpen} />
       <BookingStyles />
+      {/* Add Booking Modal */}
+      {showAddModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.3)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <form onSubmit={handleAddBooking} style={{ background: '#fff', borderRadius: 12, padding: 32, minWidth: 320, maxWidth: 400, boxShadow: '0 4px 24px rgba(0,0,0,0.18)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <h2 style={{ marginBottom: 8 }}>Add Booking</h2>
+            {/* User Dropdown */}
+            <select required value={addForm.user_id} onChange={e => setAddForm(f => ({ ...f, user_id: e.target.value, other_user_name: '', phone: '' }))} style={styles.inputCard}>
+              <option value="">Select User</option>
+              {users.map(user => (
+                <option key={user.id} value={user.id}>{user.name}</option>
+              ))}
+              <option value="other">Other</option>
+            </select>
+            {/* If 'Other' is selected, show input for new user name and phone */}
+            {addForm.user_id === 'other' && (
+              <>
+                <input required type="text" placeholder="Enter new user name" value={addForm.other_user_name} onChange={e => setAddForm(f => ({ ...f, other_user_name: e.target.value }))} style={styles.inputCard} />
+                <input required type="text" placeholder="Enter phone number" value={addForm.phone} onChange={e => setAddForm(f => ({ ...f, phone: e.target.value }))} style={styles.inputCard} />
+              </>
+            )}
+            {/* Car Dropdown */}
+            <select required value={addForm.car_id} onChange={e => setAddForm(f => ({ ...f, car_id: e.target.value }))} style={styles.inputCard}>
+              <option value="">Select Car</option>
+              {cars.map(car => (
+                <option key={car.id} value={car.id}>{car.name}</option>
+              ))}
+            </select>
+            <input required type="date" placeholder="Start Date" value={addForm.start_date} onChange={e => setAddForm(f => ({ ...f, start_date: e.target.value }))} style={styles.inputCard} />
+            <input required type="date" placeholder="End Date" value={addForm.end_date} onChange={e => setAddForm(f => ({ ...f, end_date: e.target.value }))} style={styles.inputCard} />
+            {/* Total Price (auto-calculated) */}
+            <input type="number" placeholder="Total Price" value={addForm.total_price} readOnly style={styles.inputCard} />
+            
+            {/* Availability Status */}
+            {availabilityStatus.loading && (
+              <div style={{ color: '#1890ff', fontSize: '14px', textAlign: 'center', padding: '8px' }}>
+                Checking availability...
+              </div>
+            )}
+            {!availabilityStatus.loading && availabilityStatus.message && (
+              <div style={{ 
+                color: availabilityStatus.available ? '#52c41a' : '#ff4d4f', 
+                fontSize: '14px', 
+                textAlign: 'center', 
+                padding: '8px',
+                backgroundColor: availabilityStatus.available ? '#f6ffed' : '#fff2f0',
+                borderRadius: '6px',
+                border: `1px solid ${availabilityStatus.available ? '#b7eb8f' : '#ffccc7'}`
+              }}>
+                {availabilityStatus.message}
+              </div>
+            )}
+            
+            <input type="text" placeholder="Locataire 1" value={addForm.locataire1} onChange={e => setAddForm(f => ({ ...f, locataire1: e.target.value }))} style={styles.inputCard} />
+            <input type="text" placeholder="Adresse 1" value={addForm.adresse1} onChange={e => setAddForm(f => ({ ...f, adresse1: e.target.value }))} style={styles.inputCard} />
+            <input type="text" placeholder="CIN 1" value={addForm.cin1} onChange={e => setAddForm(f => ({ ...f, cin1: e.target.value }))} style={styles.inputCard} />
+            <input type="text" placeholder="Permis 1" value={addForm.permis1} onChange={e => setAddForm(f => ({ ...f, permis1: e.target.value }))} style={styles.inputCard} />
+            <input type="text" placeholder="Locataire 2 (optional)" value={addForm.locataire2} onChange={e => setAddForm(f => ({ ...f, locataire2: e.target.value }))} style={styles.inputCard} />
+            <input type="text" placeholder="Adresse 2 (optional)" value={addForm.adresse2} onChange={e => setAddForm(f => ({ ...f, adresse2: e.target.value }))} style={styles.inputCard} />
+            <input type="text" placeholder="CIN 2 (optional)" value={addForm.cin2} onChange={e => setAddForm(f => ({ ...f, cin2: e.target.value }))} style={styles.inputCard} />
+            <input type="text" placeholder="Permis 2 (optional)" value={addForm.permis2} onChange={e => setAddForm(f => ({ ...f, permis2: e.target.value }))} style={styles.inputCard} />
+            {addError && <div style={{ color: 'red', marginBottom: 8 }}>{addError}</div>}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12 }}>
+              <button type="button" style={{ ...styles.resetButton, background: '#eee', color: '#333' }} onClick={handleCloseModal} disabled={addLoading}>Cancel</button>
+              <button 
+                type="submit" 
+                style={{ 
+                  ...styles.approveButton, 
+                  opacity: (addLoading || !availabilityStatus.available) ? 0.6 : 1,
+                  backgroundColor: !availabilityStatus.available ? '#d9d9d9' : styles.approveButton.backgroundColor,
+                  color: !availabilityStatus.available ? '#666' : styles.approveButton.color,
+                  cursor: (addLoading || !availabilityStatus.available) ? 'not-allowed' : 'pointer'
+                }} 
+                disabled={addLoading || !availabilityStatus.available}
+                title={!availabilityStatus.available ? 'Car is not available for selected dates' : 'Add booking'}
+              >
+                {addLoading ? 'Adding...' : (!availabilityStatus.available ? 'Car Not Available' : 'Add Booking')}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
       <MainContent 
         language={language} 
         contentMarginLeft={contentMarginLeft} 
@@ -673,6 +994,7 @@ const BookingManagement = () => {
         renderUserName={renderUserName}
         renderStatusIcon={renderStatusIcon}
         isMobile={isMobile}
+        setShowAddModal={setShowAddModal}
       />
     </div>
   );
@@ -696,7 +1018,8 @@ const MainContent = ({
   renderCarName, 
   renderUserName, 
   renderStatusIcon, 
-  isMobile
+  isMobile,
+  setShowAddModal
 }) => {
   
   // Update the formatDate function to use a more direct approach
@@ -925,6 +1248,13 @@ const MainContent = ({
               : styles.filterContainer
           }
         >
+          {/* Add Booking Button */}
+          <button
+            style={{ ...styles.approveButton, marginBottom: 8, width: isMobile ? '100%' : undefined }}
+            onClick={() => setShowAddModal(true)}
+          >
+            Add Booking
+          </button>
           <input
             type="text"
             placeholder="Filter by:"
@@ -976,22 +1306,22 @@ const MainContent = ({
           <table style={styles.table}>
             <thead>
               <tr>
-                <th style={styles.tableHeader}>User</th>
-                <th style={styles.tableHeader}>Car</th>
-                <th style={styles.tableHeader}>Prix/Jour</th>
-                <th style={styles.tableHeader}>Start Date</th>
-                <th style={styles.tableHeader}>End Date</th>
-                <th style={styles.tableHeader}>Price (MAD)</th>
-                <th style={styles.tableHeader}>Status</th>
-                <th style={styles.tableHeader}>Actions</th>
-                <th style={styles.tableHeader}>Contrat</th>
+                <th style={styles.tableHeader}>{translations.user[language] || 'User'}</th>
+                <th style={styles.tableHeader}>{translations.car[language] || 'Car'}</th>
+                <th style={styles.tableHeader}>{translations.pricePerDay[language] || 'Price/Day'}</th>
+                <th style={styles.tableHeader}>{translations.startDate[language] || 'Start Date'}</th>
+                <th style={styles.tableHeader}>{translations.endDate[language] || 'End Date'}</th>
+                <th style={styles.tableHeader}>{translations.price[language] || 'Price (MAD)'}</th>
+                <th style={styles.tableHeader}>{translations.status[language] || 'Status'}</th>
+                <th style={styles.tableHeader}>{translations.actions[language] || 'Actions'}</th>
+                <th style={styles.tableHeader}>{translations.contract[language] || 'Contract'}</th>
               </tr>
             </thead>
             <tbody>
               {displayedBookings.length === 0 ? (
                 <tr>
                   <td colSpan="9" style={{ textAlign: 'center', padding: '20px' }}>
-                    No bookings found
+                    {translations.noBookingsFound[language] || 'No bookings found'}
                   </td>
                 </tr>
               ) : (
@@ -1001,15 +1331,7 @@ const MainContent = ({
                     <td style={styles.tableCell}>{renderCarName(booking)}</td>
                     <td style={styles.tableCell}>{booking.Car?.price_per_day || '0'} MAD</td>
                     <td style={styles.tableCell}>{formatDate(booking.start_date)}</td>
-                    <td style={styles.tableCell}>
-                      <input
-                        type="date"
-                        defaultValue={booking.end_date ? booking.end_date.split('T')[0] : ''}
-                        min={booking.start_date ? booking.start_date.split('T')[0] : ''}
-                        onChange={(e) => handleEndDateChange(booking.id, e.target.value)}
-                        style={styles.dateInput}
-                      />
-                    </td>
+                    <td style={styles.tableCell}>{formatDate(booking.end_date)}</td>
                     <td style={styles.tableCell}>{booking.total_price || '0'} MAD</td>
                     <td style={styles.tableCell}>
                       <span style={{
@@ -1021,10 +1343,17 @@ const MainContent = ({
                           booking.status === 'cancelled' ? '#ff4d4f' :
                           '#666'
                       }}>
-                        {booking.status}
+                        {translations[booking.status] ? translations[booking.status][language] : booking.status}
                       </span>
                     </td>
-                    <td style={styles.tableCell}>
+                    <td style={{
+                      ...styles.tableCell,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      justifyContent: 'center',
+                      minWidth: 180,
+                    }}>
                       {booking.status === 'pending' && (
                         <>
                           <button 
@@ -1053,10 +1382,10 @@ const MainContent = ({
                         </button>
                       )}
                       {booking.status === 'completed' && (
-                        <span style={styles.completedText}>Completed</span>
+                        <span style={styles.completedText}>{translations.completed[language] || 'Completed'}</span>
                       )}
                       {booking.status === 'cancelled' && (
-                        <span style={styles.deniedText}>Cancelled</span>
+                        <span style={styles.deniedText}>{translations.cancelled[language] || 'Cancelled'}</span>
                       )}
                     </td>
                     <td style={styles.tableCell}>
@@ -1303,6 +1632,12 @@ const styles = {
     borderRadius: '4px',
     fontSize: '14px',
     width: '140px'
+  },
+  inputCard: {
+    padding: '8px 12px',
+    border: '1px solid #d9d9d9',
+    borderRadius: '4px',
+    fontSize: '14px',
   }
 };
 

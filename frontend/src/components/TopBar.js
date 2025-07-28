@@ -234,24 +234,24 @@ const TopBar = ({
                 {isLoggedIn ? (
                   <>
                     {/* Account Section */}
-                    <div style={styles.menuSectionTitle}>Account</div>
+                    <div style={styles.menuSectionTitle}>{lang.account || 'Account'}</div>
                     <div style={styles.menuSubSection}>
-                      <Link to="/my-profile" style={styles.menuItem}>Personal Information</Link>
-                      <Link to="/change-password" style={styles.menuItem}>Password & Security</Link>
-                      <Link to="/preferences" style={styles.menuItem}>{lang.preferences}</Link>
+                      <Link to="/my-profile" style={styles.menuItem}>{lang.personalInformation || 'Personal Information'}</Link>
+                      <Link to="/change-password" style={styles.menuItem}>{lang.passwordAndSecurity || 'Password & Security'}</Link>
+                      <Link to="/preferences" style={styles.menuItem}>{lang.preferences || 'Preferences'}</Link>
                     </div>
 
                     {/* My Booking Section */}
-                    <div style={styles.menuSectionTitle}>My Booking</div>
+                    <div style={styles.menuSectionTitle}>{lang.myBooking || 'My Booking'}</div>
                     <div style={styles.menuSubSection}>
-                      <Link to="/my-bookings" style={styles.menuItem}>Booking History</Link>
+                      <Link to="/my-bookings" style={styles.menuItem}>{lang.bookingHistory || 'Booking History'}</Link>
                     </div>
 
                     {/* Help and Support Section */}
-                    <div style={styles.menuSectionTitle}>Help and Support</div>
+                    <div style={styles.menuSectionTitle}>{lang.helpAndSupport || 'Help and Support'}</div>
                     <div style={styles.menuSubSection}>
-                      <Link to="/help-center" style={styles.menuItem}>Customer Support</Link>
-                      <Link to="/contact-support" style={styles.menuItem}>Help and FAQ</Link>
+                      <Link to="/help-center" style={styles.menuItem}>{lang.customerSupport || 'Customer Support'}</Link>
+                      <Link to="/contact-support" style={styles.menuItem}>{lang.helpAndFAQ || 'Help and FAQ'}</Link>
                     </div>
 
                     <button style={styles.signOutButton} onClick={onSignOut}>{lang.signOut}</button>

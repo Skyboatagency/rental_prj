@@ -13,6 +13,8 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   // Handle window resize
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -64,7 +66,7 @@ const Login = () => {
     console.log("Tentative de connexion avec:", { username, password });
 
     try {
-      const response = await axios.post("http://localhost:5000/api/admins/login", {
+      const response = await axios.post(`${API_URL}/admins/login`, {
         email: username,
         password: password
       });
@@ -104,14 +106,14 @@ const Login = () => {
           
           <form onSubmit={handleLogin} style={styles.form}>
             <div style={styles.inputGroup}>
-              <label style={styles.label}>Username</label>
+              <label style={styles.label}>Email</label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 style={styles.input}
                 className="input-field"
-                placeholder="nabedkhan"
+                placeholder="example@gmail.com"
               />
             </div>
             
@@ -148,7 +150,6 @@ const Login = () => {
             <button type="submit" style={styles.signInButton} className="sign-in-button">
               Sign In
             </button>
-
             <div style={styles.registerContainer}>
               <p style={styles.registerText}>Vous n'avez pas de compte ?</p>
               <Link to="/admin-register" style={styles.registerLink}>

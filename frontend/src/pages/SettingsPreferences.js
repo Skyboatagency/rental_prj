@@ -107,7 +107,6 @@ const LanguageSwitcher = ({ language, setLanguage }) => {
       >
         <option value="en">English</option>
         <option value="fr">Français</option>
-        <option value="ar">العربية</option>
       </select>
     </div>
   );
@@ -181,9 +180,8 @@ const SettingsPreferences = () => {
   }, [isOpen, windowWidth]);
 
   const handleSaveChanges = () => {
-    alert(`${translations.saveChanges[language]}:
-- ${translations.language[language]}: ${language}
-- ${translations.emailNotifications[language]}: ${emailNotifications ? 'Enabled' : 'Disabled'}`);
+    localStorage.setItem('language', language);
+    window.location.reload(); // Force reload to apply language everywhere
   };
 
   const handleResetToDefault = () => {

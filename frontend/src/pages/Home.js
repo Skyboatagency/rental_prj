@@ -191,7 +191,73 @@ const texts = {
     step2Description: "Browse our fleet and find the perfect car for your needs",
     step3Title: "Verification",
     step3Description: "Review your information and confirm your booking",
-    step: "Step"
+    step: "Step",
+    estimatedPrice: "Estimated Price",
+    locationNotAvailable: "Location not available",
+    year: "Year",
+    transmission: "Transmission",
+    fuelType: "Fuel Type",
+    seats: "Seats",
+    nextStep: "Next Step",
+    tenant: "Tenant",
+    otherDriver: "Other Driver",
+    addOtherDriver: "Add Other Driver",
+    hideOtherDriver: "Hide Other Driver",
+    fullName: "Full Name",
+    address: "Address",
+    cin: "CIN",
+    licenseNumber: "License Number",
+    back: "Back",
+    confirmBooking: "Confirm Booking",
+    bookingInfo: "Booking Information",
+    car: "Car",
+    place: "Place",
+    dates: "Dates",
+    totalPrice: "Total Price",
+    notAvailable: "Not Available",
+    startDate: "Start Date",
+    endDate: "End Date",
+    confirmation: "Confirmation",
+    quickLinks: "Quick Links",
+    home: "Home",
+    availableCars: "Available Cars",
+    contactUs: "Contact Us",
+    aboutUs: "About Us",
+    contactInfo: "Contact Info",
+    newsletter: "Newsletter",
+    subscribeToOurNewsletterForUpdatesAndExclusiveOffers: "Subscribe to our newsletter for updates and exclusive offers.",
+    enterYourEmail: "Enter your email",
+    subscribe: "Subscribe",
+    whyChooseUs: "Why Choose Us",
+    excellenceInMoroccanCarRentalServices: "Excellence in Moroccan Car Rental Services",
+    experienceTheFinestSelectionOfRentalCarsInMorocco: "Experience the finest selection of rental cars in Morocco.",
+    competitivePricing: "Competitive Pricing",
+    competitivePricingDesc: "Best self-drive deals in Morocco without compromising on quality",
+    luxuryOptions: "Luxury Options",
+    luxuryOptionsDesc: "Premium vehicles perfect for weddings and special occasions",
+    expertService: "Expert Service",
+    expertServiceDesc: "Certified mechanics and genuine spare parts for maintenance",
+    roadAssistance: "24/7 Road Assistance",
+    roadAssistanceDesc: "Round-the-clock support and assistance anywhere in Morocco",
+    freePickUpDropOff: "Free Pick-Up & Drop-Off",
+    freePickUpDropOffDesc: "Convenient delivery and collection service at your location",
+    yourDreamCarAwaits: "Your Dream Car Awaits",
+    experienceLuxuryAndComfortWithOurPremiumFleetOfVehicles: "Experience luxury and comfort with our premium fleet of vehicles.",
+    exploreOurFleet: "Explore Our Fleet",
+    vehiclesInStock: "Vehicles in Stock",
+    yearsOfExcellence: "Years of Excellence",
+    happyClients: "Happy Clients",
+    expertReviews: "Expert Reviews",
+    account: 'Account',
+    personalInformation: 'Personal Information',
+    passwordAndSecurity: 'Password & Security',
+    preferences: 'Preferences',
+    myBooking: 'My Booking',
+    bookingHistory: 'Booking History',
+    helpAndSupport: 'Help and Support',
+    customerSupport: 'Customer Support',
+    helpAndFAQ: 'Help and FAQ',
+    signOut: 'Sign Out'
   },
   fr: {
     heroTitle: "Vous cherchez la voiture idéale? \nTrouvez la meilleure voiture pour votre voyage.",
@@ -210,7 +276,7 @@ const texts = {
     pickUpDateLabel: "Date de prise en charge",
     returnDateLabel: "Date de retour",
     findButton: "Trouver un véhicule",
-    bookNow: "Réserver maintenant",
+    bookNow: "Réserver",
     noImage: "Pas d'image",
     footerQuickLinks: "Liens rapides",
     footerInfoPages: "Pages d'information",
@@ -292,7 +358,73 @@ const texts = {
     step2Description: "Parcourez notre flotte et trouvez la voiture parfaite pour vos besoins",
     step3Title: "Vérification",
     step3Description: "Revisez vos informations et confirmez votre réservation",
-    step: "Étape"
+    step: "Étape",
+    estimatedPrice: "Prix estimé",
+    locationNotAvailable: "Lieu non disponible",
+    year: "Année",
+    transmission: "Transmission",
+    fuelType: "Type de carburant",
+    seats: "Places",
+    nextStep: "Étape suivante",
+    tenant: "Locataire",
+    otherDriver: "Autre conducteur",
+    addOtherDriver: "Ajouter un autre conducteur",
+    hideOtherDriver: "Masquer l'autre conducteur",
+    fullName: "Nom complet",
+    address: "Adresse",
+    cin: "CIN",
+    licenseNumber: "Numéro de permis",
+    back: "Retour",
+    confirmBooking: "Confirmer la réservation",
+    bookingInfo: "Informations de réservation",
+    car: "Voiture",
+    place: "Lieu",
+    dates: "Dates",
+    totalPrice: "Prix total",
+    notAvailable: "Non disponible",
+    startDate: "Date de début",
+    endDate: "Date de fin",
+    confirmation: "Confirmation",
+    quickLinks: "Liens rapides",
+    home: "Accueil",
+    availableCars: "Voitures Disponibles",
+    contactUs: "Contactez-nous",
+    aboutUs: "À propos",
+    contactInfo: "Contact Info",
+    newsletter: "Newsletter",
+    subscribeToOurNewsletterForUpdatesAndExclusiveOffers: "Abonnez-vous à notre newsletter pour recevoir des mises à jour et des offres exclusives.",
+    enterYourEmail: "Entrez votre email",
+    subscribe: "S'abonner",
+    whyChooseUs: "Pourquoi nous choisir",
+    excellenceInMoroccanCarRentalServices: "L'excellence dans la location de voitures au Maroc",
+    experienceTheFinestSelectionOfRentalCarsInMorocco: "Découvrez la meilleure sélection de voitures de location au Maroc.",
+    competitivePricing: "Tarifs compétitifs",
+    competitivePricingDesc: "Meilleures offres de location sans compromis sur la qualité",
+    luxuryOptions: "Options de luxe",
+    luxuryOptionsDesc: "Véhicules haut de gamme parfaits pour mariages et occasions spéciales",
+    expertService: "Service expert",
+    expertServiceDesc: "Mécaniciens certifiés et pièces d'origine pour l'entretien",
+    roadAssistance: "Assistance routière 24/7",
+    roadAssistanceDesc: "Assistance et support 24h/24 partout au Maroc",
+    freePickUpDropOff: "Livraison & récupération gratuites",
+    freePickUpDropOffDesc: "Service de livraison et de récupération à votre emplacement",
+    yourDreamCarAwaits: "Votre Voiture Désire",
+    experienceLuxuryAndComfortWithOurPremiumFleetOfVehicles: "Expérience de luxe et de confort avec notre flotte de véhicules haut de gamme.",
+    exploreOurFleet: "Découvrez notre flotte",
+    vehiclesInStock: "Voitures en stock",
+    yearsOfExcellence: "Années d'excellence",
+    happyClients: "Clients heureux",
+    expertReviews: "Avis d'experts",
+    account: 'Compte',
+    personalInformation: 'Informations personnelles',
+    passwordAndSecurity: 'Mot de passe & sécurité',
+    preferences: 'Préférences',
+    myBooking: 'Mes réservations',
+    bookingHistory: 'Historique des réservations',
+    helpAndSupport: 'Aide et support',
+    customerSupport: 'Support client',
+    helpAndFAQ: 'Aide et FAQ',
+    signOut: 'Déconnexion'
   },
   ar: {
     heroTitle: "هل تبحث عن سيارة مثالية؟ \nاكتشف أفضل سيارة لرحلتك.",
@@ -393,7 +525,50 @@ const texts = {
     step2Description: "تصفح مجموعتنا واختيار السيارة المناسبة لك",
     step3Title: "التحقق",
     step3Description: "تصفح المعلومات وتأكيد الحجز",
-    step: "الخطوة"
+    step: "الخطوة",
+    estimatedPrice: "السعر المقدر",
+    locationNotAvailable: "الموقع غير متاح",
+    year: "السنة",
+    transmission: "ناقل الحركة",
+    fuelType: "نوع الوقود",
+    seats: "المقاعد",
+    nextStep: "الخطوة التالية",
+    tenant: "المستأجر",
+    otherDriver: "المانع",
+    addOtherDriver: "إضافة مانع جديد",
+    hideOtherDriver: "إخفاء المانع",
+    fullName: "الاسم الكامل",
+    address: "العنوان",
+    cin: "رقم الهوية الوطنية",
+    licenseNumber: "رقم رخصة القيادة",
+    back: "العودة",
+    confirmBooking: "تأكيد الحجز",
+    bookingInfo: "معلومات الحجز",
+    car: "السيارة",
+    place: "المكان",
+    dates: "التواريخ",
+    totalPrice: "السعر الكلي",
+    notAvailable: "غير متاح",
+    startDate: "تاريخ البدء",
+    endDate: "تاريخ الانتهاء",
+    confirmation: "التأكيد",
+    yourDreamCarAwaits: "سيارتك المثالية تنتظرك",
+    experienceLuxuryAndComfortWithOurPremiumFleetOfVehicles: "تجربة جوية وموثوقة مع سياراتنا المتميزة.",
+    exploreOurFleet: "استكشف سياراتنا",
+    vehiclesInStock: "سيارات متاحة",
+    yearsOfExcellence: "سنوات التفوق",
+    happyClients: "عملاء سعداء",
+    expertReviews: "مراجع خبراء",
+    account: 'الحساب',
+    personalInformation: 'المعلومات الشخصية',
+    passwordAndSecurity: 'كلمة المرور والأمان',
+    preferences: 'التفضيلات',
+    myBooking: 'حجوزاتي',
+    bookingHistory: 'سجل الحجوزات',
+    helpAndSupport: 'المساعدة والدعم',
+    customerSupport: 'دعم العملاء',
+    helpAndFAQ: 'المساعدة والأسئلة الشائعة',
+    signOut: 'تسجيل الخروج'
   }
 };
 
@@ -1308,7 +1483,7 @@ Pourriez-vous confirmer la disponibilité pour finaliser cette réservation ? �
 
 Merci d'avance !`;
 
-      const whatsappURL = `https://web.whatsapp.com/send?phone=212770256968&text=${encodeURIComponent(message)}&app_absent=0`;
+      const whatsappURL = `https://web.whatsapp.com/send?phone=212632835968&text=${encodeURIComponent(message)}&app_absent=0`;
       window.open(whatsappURL, '_blank');
 
       setBookingModalOpen(false);
@@ -1508,12 +1683,12 @@ Merci d'avance !`;
                   borderBottom: '1px solid #eee',
                   width: '100%',
                 }}>
-                  Estimated price : {totalPrice} MAD
+                  {lang.estimatedPrice} : {totalPrice} MAD
                 </div>
               ) : (
               <div style={styles.newPriceContainer}>
                 <p style={styles.newPriceText}>
-                  Estimated price : {totalPrice} MAD
+                  {lang.estimatedPrice} : {totalPrice} MAD
                 </p>
               </div>
               )}
@@ -1538,7 +1713,7 @@ Merci d'avance !`;
                 </h2>
                 <div style={styles.newLocationRow}>
                   <FaMapMarkerAlt style={styles.newLocationIcon} />
-                  <span>{selectedCar.location || 'Location not available'}</span>
+                  <span>{selectedCar.location || lang.locationNotAvailable}</span>
                 </div>
               </div>
               <div
@@ -1563,19 +1738,19 @@ Merci d'avance !`;
               >
                 <div style={styles.newSpecItem}>
                   <FaCalendarAlt style={styles.newSpecIcon} />
-                  <span><strong>Year : </strong> {selectedCar.year || 'Not available'}</span>
+                  <span><strong>{lang.year} : </strong> {selectedCar.year || lang.notAvailable}</span>
                 </div>
                 <div style={styles.newSpecItem}>
                   <FaCog style={styles.newSpecIcon} />
-                  <span><strong>Transmission : </strong> {selectedCar.transmission || 'Not available'}</span>
+                  <span><strong>{lang.transmission} : </strong> {selectedCar.transmission || lang.notAvailable}</span>
                 </div>
                 <div style={styles.newSpecItem}>
                   <FaGasPump style={styles.newSpecIcon} />
-                  <span><strong>Fuel Type : </strong> {selectedCar.fuel_type || 'Not available'}</span>
+                  <span><strong>{lang.fuelType} : </strong> {selectedCar.fuel_type || lang.notAvailable}</span>
                 </div>
                 <div style={styles.newSpecItem}>
                   <FaUsers style={styles.newSpecIcon} />
-                  <span><strong>Seats : </strong> {selectedCar.seats ? `${selectedCar.seats}` : 'Not available'}</span>
+                  <span><strong>{lang.seats} : </strong> {selectedCar.seats ? `${selectedCar.seats}` : lang.notAvailable}</span>
                 </div>
               </div>
               <div style={styles.stepsContainer}>
@@ -1600,7 +1775,7 @@ Merci d'avance !`;
                           ...(currentStep === stepIndex ? styles.progressLabelActive : {}),
                           ...(isMobile ? { fontSize: 11, marginTop: 4 } : {}),
                         }}>
-                          {stepIndex === 1 ? 'Dates' : stepIndex === 2 ? 'Locataires' : 'Confirmation'}
+                          {stepIndex === 1 ? lang.dates : stepIndex === 2 ? lang.tenant : lang.confirmation}
                         </div>
                       </div>
                       {stepIndex < 3 && (
@@ -1632,7 +1807,7 @@ Merci d'avance !`;
                         color: bookingData.start_date ? '#000' : '#666',
                         fontWeight: bookingData.start_date ? '500' : 'normal'
                       }}>
-                        {bookingData.start_date ? formatDateInEnglish(bookingData.start_date) : 'Start Date'}
+                        {bookingData.start_date ? formatDateInEnglish(bookingData.start_date) : lang.startDate}
                       </span>
                     </div>
                     <span style={styles.newDateArrow}>→</span>
@@ -1648,7 +1823,7 @@ Merci d'avance !`;
                         color: bookingData.end_date ? '#000' : '#666',
                         fontWeight: bookingData.end_date ? '500' : 'normal'
                       }}>
-                        {bookingData.end_date ? formatDateInEnglish(bookingData.end_date) : 'End Date'}
+                        {bookingData.end_date ? formatDateInEnglish(bookingData.end_date) : lang.endDate}
                       </span>
                     </div>
                   </div>
@@ -1681,46 +1856,46 @@ Merci d'avance !`;
                     }}
                     disabled={!bookingData.start_date || !bookingData.end_date}
                   >
-                    Next Step
+                    {lang.nextStep}
                   </button>
                 </div>
               )}
               {/* Step 2: Tenant Information */}
               {currentStep === 2 && (
                 <div style={styles.tenantInfoContainer}>
-                  <h3 style={styles.tenantInfoTitle}>Locataire</h3>
+                  <h3 style={styles.tenantInfoTitle}>{lang.tenant}</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12, background: '#f9f9f9', borderRadius: 8, padding: 15 }}>
                       <input
                         type="text"
-                      placeholder="Nom complet"
+                      placeholder={lang.fullName}
                         value={bookingData.locataire1}
                         onChange={(e) => setBookingData({...bookingData, locataire1: e.target.value})}
                         style={styles.input}
                       />
                       <input
                         type="text"
-                      placeholder="Adresse"
+                      placeholder={lang.address}
                         value={bookingData.adresse1}
                         onChange={(e) => setBookingData({...bookingData, adresse1: e.target.value})}
                         style={styles.input}
                       />
                       <input
                         type="text"
-                      placeholder="CIN"
+                      placeholder={lang.cin}
                         value={bookingData.cin1}
                         onChange={(e) => setBookingData({...bookingData, cin1: e.target.value})}
                         style={styles.input}
                       />
                       <input
                         type="text"
-                      placeholder="Numéro de permis"
+                      placeholder={lang.licenseNumber}
                         value={bookingData.permis1}
                         onChange={(e) => setBookingData({...bookingData, permis1: e.target.value})}
                         style={styles.input}
                       />
                     </div>
                   <div style={{display: 'flex', alignItems: 'center', gap: 8, marginTop: 20}}>
-                      <h3 style={styles.tenantInfoTitle}>Autre Conducteur (Optionnel)</h3>
+                      <h3 style={styles.tenantInfoTitle}>{lang.otherDriver}</h3>
                     {!showTenant2 && (
                       <button
                         type="button"
@@ -1738,7 +1913,7 @@ Merci d'avance !`;
                           marginLeft: 8,marginTop:-10
                         }}
                         onClick={() => setShowTenant2(true)}
-                        aria-label="Ajouter Autre Conducteur"
+                        aria-label={lang.addOtherDriver}
                       >
                         <FaPlus />
                       </button>
@@ -1760,7 +1935,7 @@ Merci d'avance !`;
                           marginLeft: 8
                         }}
                         onClick={() => setShowTenant2(false)}
-                        aria-label="Masquer Autre Conducteur"
+                        aria-label={lang.hideOtherDriver}
                       >
                         <FaMinus />
                       </button>
@@ -1770,28 +1945,28 @@ Merci d'avance !`;
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, background: '#f9f9f9', borderRadius: 8, padding: 15 }}>
                             <input
                               type="text"
-                        placeholder="Nom complet"
+                        placeholder={lang.fullName}
                               value={bookingData.locataire2}
                               onChange={(e) => setBookingData({...bookingData, locataire2: e.target.value})}
                               style={styles.input}
                             />
                             <input
                               type="text"
-                        placeholder="Adresse"
+                        placeholder={lang.address}
                               value={bookingData.adresse2}
                               onChange={(e) => setBookingData({...bookingData, adresse2: e.target.value})}
                               style={styles.input}
                             />
                             <input
                               type="text"
-                        placeholder="CIN"
+                        placeholder={lang.cin}
                               value={bookingData.cin2}
                               onChange={(e) => setBookingData({...bookingData, cin2: e.target.value})}
                               style={styles.input}
                             />
                             <input
                               type="text"
-                        placeholder="Numéro de permis"
+                        placeholder={lang.licenseNumber}
                               value={bookingData.permis2}
                               onChange={(e) => setBookingData({...bookingData, permis2: e.target.value})}
                               style={styles.input}
@@ -1803,7 +1978,7 @@ Merci d'avance !`;
                       style={{ ...styles.backButton, height: 48 }}
                       onClick={() => setCurrentStep(1)}
                     >
-                      Back
+                      {lang.back}
                     </button>
                     <button
                       style={{
@@ -1814,7 +1989,7 @@ Merci d'avance !`;
                       onClick={() => setCurrentStep(3)}
                       disabled={!bookingData.locataire1 || !bookingData.adresse1 || !bookingData.cin1 || !bookingData.permis1}
                     >
-                      Next Step
+                      {lang.nextStep}
                     </button>
                   </div>
                 </div>
@@ -1826,33 +2001,33 @@ Merci d'avance !`;
                     {/* Titre principal */}
                     <div style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: 20, color: '#222', marginBottom: 18, textAlign: 'left', paddingLeft: 12 }}>
                       <FaMinus style={{ fontSize: 14, color: '#222', marginRight: 8 }} />
-                      Informations de réservation :
+                      {lang.bookingInfo} :
                     </div>
                     {/* Sous-titres réservation */}
-                    <div style={{ marginBottom: 8, textAlign: 'left' }}><b>Voiture :</b> {selectedCar.name ? selectedCar.name.toUpperCase() : ''} - {selectedCar.model}</div>
-                    <div style={{ marginBottom: 8, textAlign: 'left' }}><b>Lieu :</b> {selectedCar.location}</div>
-                    <div style={{ marginBottom: 8, textAlign: 'left' }}><b>Dates :</b> {bookingData.start_date ? formatDateInEnglish(bookingData.start_date) : ''} → {bookingData.end_date ? formatDateInEnglish(bookingData.end_date) : ''}</div>
-                    <div style={{ marginBottom: 18, textAlign: 'left' }}><b>Prix total :</b> {convertPrice(totalPrice)} {getCurrencySymbol()}</div>
+                    <div style={{ marginBottom: 8, textAlign: 'left' }}><b>{lang.car}</b> {selectedCar.name ? selectedCar.name.toUpperCase() : ''} - {selectedCar.model}</div>
+                    <div style={{ marginBottom: 8, textAlign: 'left' }}><b>{lang.place}</b> {selectedCar.location}</div>
+                    <div style={{ marginBottom: 8, textAlign: 'left' }}><b>{lang.dates}</b> {bookingData.start_date ? formatDateInEnglish(bookingData.start_date) : ''} → {bookingData.end_date ? formatDateInEnglish(bookingData.end_date) : ''}</div>
+                    <div style={{ marginBottom: 18, textAlign: 'left' }}><b>{lang.totalPrice}</b> {convertPrice(totalPrice)} {getCurrencySymbol()}</div>
                     {/* Titre Locataire */}
                     <div style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: 20, color: '#222', margin: '24px 0 12px 0', textAlign: 'left', paddingLeft: 12 }}>
                       <FaMinus style={{ fontSize: 14, color: '#222', marginRight: 8 }} />
-                      Locataire
+                      {lang.tenant}
                     </div>
-                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Nom :</b> {bookingData.locataire1}</div>
-                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Adresse :</b> {bookingData.adresse1}</div>
-                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>CIN :</b> {bookingData.cin1}</div>
-                    <div style={{ marginBottom: 18, textAlign: 'left' }}><b>Permis :</b> {bookingData.permis1}</div>
+                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.fullName}</b> {bookingData.locataire1}</div>
+                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.address}</b> {bookingData.adresse1}</div>
+                    <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.cin}</b> {bookingData.cin1}</div>
+                    <div style={{ marginBottom: 18, textAlign: 'left' }}><b>{lang.licenseNumber}</b> {bookingData.permis1}</div>
                     {/* Autre Conducteur si présent */}
                     {bookingData.locataire2 && (
                       <>
                         <div style={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: 20, color: '#222', margin: '24px 0 12px 0', textAlign: 'left', paddingLeft: 12 }}>
                           <FaMinus style={{ fontSize: 14, color: '#222', marginRight: 8 }} />
-                          Autre Conducteur
+                          {lang.otherDriver}
                         </div>
-                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Nom :</b> {bookingData.locataire2}</div>
-                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Adresse :</b> {bookingData.adresse2}</div>
-                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>CIN :</b> {bookingData.cin2}</div>
-                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>Permis :</b> {bookingData.permis2}</div>
+                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.fullName}</b> {bookingData.locataire2}</div>
+                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.address}</b> {bookingData.adresse2}</div>
+                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.cin}</b> {bookingData.cin2}</div>
+                        <div style={{ marginBottom: 6, textAlign: 'left' }}><b>{lang.licenseNumber}</b> {bookingData.permis2}</div>
                       </>
                     )}
                   </div>
@@ -1861,13 +2036,13 @@ Merci d'avance !`;
                       style={{ ...styles.backButton, height: 48 }}
                       onClick={() => setCurrentStep(2)}
                     >
-                      Back
+                      {lang.back}
                     </button>
                     <button 
                       style={styles.newConfirmButton}
-                      onClick={handleBooking}
+                      onClick={handleBookingConfirm}
                     >
-                      Confirm Booking
+                      {lang.confirmBooking}
                     </button>
                   </div>
                 </div>
@@ -2116,7 +2291,7 @@ Merci d'avance !`;
           <div style={styles.searchContent}>
           <div style={styles.searchRow}>
               <div style={styles.searchField}>
-              <label style={styles.searchLabel}>Transmission</label>
+              <label style={styles.searchLabel}>{lang.transmission}</label>
               <select
                 style={styles.select}
                 value={transmission}
@@ -2129,7 +2304,7 @@ Merci d'avance !`;
               </select>
             </div>
               <div style={styles.searchField}>
-              <label style={styles.searchLabel}>Carburant</label>
+              <label style={styles.searchLabel}>{lang.fuelType}</label>
               <select
                 style={styles.select}
                 value={fuelType}
@@ -2142,7 +2317,7 @@ Merci d'avance !`;
               </select>
             </div>
               <div style={styles.searchField}>
-              <label style={styles.searchLabel}>Nombre de places</label>
+              <label style={styles.searchLabel}>{lang.seats}</label>
               <select
                 style={styles.select}
                 value={seatsNumber}
@@ -2157,7 +2332,7 @@ Merci d'avance !`;
           </div>
           <div style={styles.searchRow}>
               <div style={styles.searchField}>
-              <label style={styles.searchLabel}>Location</label>
+              <label style={styles.searchLabel}>{lang.location}</label>
               <select
                 style={styles.select}
                 value={locationValue}
@@ -2170,7 +2345,7 @@ Merci d'avance !`;
               </select>
             </div>
               <div style={styles.dateRangeContainer}>
-                <label style={styles.searchLabel}>Pick Up Date & Return Date</label>
+                <label style={styles.searchLabel}>{lang.pickUpDate} & {lang.returnDate}</label>
                 <div style={{ display: 'flex', gap: 10 }}>
                   <input
                     type="date"
@@ -2178,7 +2353,7 @@ Merci d'avance !`;
                     onChange={e => setStartDate(e.target.value ? moment(e.target.value) : null)}
                     style={{ flex: 1, padding: 10, borderRadius: 4, border: '1px solid #ddd', fontSize: 14 }}
                     min={moment().format('YYYY-MM-DD')}
-                    placeholder="Start Date"
+                    placeholder={lang.startDate}
                   />
                   <input
                     type="date"
@@ -2186,12 +2361,12 @@ Merci d'avance !`;
                     onChange={e => setEndDate(e.target.value ? moment(e.target.value) : null)}
                     style={{ flex: 1, padding: 10, borderRadius: 4, border: '1px solid #ddd', fontSize: 14 }}
                     min={startDate ? startDate.format('YYYY-MM-DD') : moment().format('YYYY-MM-DD')}
-                    placeholder="End Date"
+                    placeholder={lang.endDate}
                   />
                 </div>
             </div>
               <div style={styles.priceRangeContainer}>
-                <label style={styles.searchLabel}>Prix max: {priceValue} MAD / jour</label>
+                <label style={styles.searchLabel}>{lang.priceRange}: {priceValue} MAD / jour</label>
                 <input
                   type="range"
                   min="0"
@@ -2275,7 +2450,7 @@ Merci d'avance !`;
           }
         >
           {cars.length === 0 ? (
-            <div style={{ color: '#888', fontSize: 18, margin: 40 }}>No cars found.</div>
+            <div style={{ color: '#888', fontSize: 18, margin: 40 }}>{lang.noCarsFound}</div>
           ) : (
             cars.slice(0, 6).map((car, index) => renderCarCard(car, index))
           )}
@@ -2330,7 +2505,7 @@ Merci d'avance !`;
               display: "block",
               marginBottom: "20px"
             }}>
-              Why Choose Us
+              {lang.whyChooseUs}
             </span>
             <h2 style={{
               fontSize: "32px",
@@ -2341,7 +2516,7 @@ Merci d'avance !`;
               marginBottom: "20px",
               lineHeight: "1.2"
             }}>
-              Excellence in Moroccan Car Rental Services
+              {lang.excellenceInMoroccanCarRentalServices}
             </h2>
             <p style={{
               fontSize: "16px",
@@ -2350,9 +2525,9 @@ Merci d'avance !`;
               maxWidth: "800px",
               margin: "0 auto"
             }}>
-              Experience the finest selection of rental cars in Morocco, from luxury wedding vehicles to practical self-drive options. Our competitive pricing and extensive fleet ensure the perfect match for your journey.
+              {lang.experienceTheFinestSelectionOfRentalCarsInMorocco}
             </p>
-                  </div>
+          </div>
 
           {/* Features Grid */}
           <div style={{
@@ -2364,20 +2539,20 @@ Merci d'avance !`;
             {[
               {
                 icon: "💰",
-                title: "Competitive Pricing",
-                description: "Best self-drive deals in Morocco without compromising on quality",
+                title: lang.competitivePricing,
+                description: lang.competitivePricingDesc,
                 gradient: "linear-gradient(135deg, #2576F8 0%, #3FCBFF 100%)"
               },
               {
                 icon: "👑",
-                title: "Luxury Options",
-                description: "Premium vehicles perfect for weddings and special occasions",
+                title: lang.luxuryOptions,
+                description: lang.luxuryOptionsDesc,
                 gradient: "linear-gradient(135deg, #FF3366 0%, #FF6B6B 100%)"
               },
               {
                 icon: "🛠️",
-                title: "Expert Service",
-                description: "Certified mechanics and genuine spare parts for maintenance",
+                title: lang.expertService,
+                description: lang.expertServiceDesc,
                 gradient: "linear-gradient(135deg, #36D1DC 0%, #5B86E5 100%)"
               }
             ].map((feature, index) => (
@@ -2418,7 +2593,7 @@ Merci d'avance !`;
                   boxShadow: "0 10px 20px rgba(0,0,0,0.2)"
                 }}>
                   {feature.icon}
-                    </div>
+                </div>
                 <h3 style={{
                   fontSize: "24px",
                   fontWeight: "600",
@@ -2441,9 +2616,9 @@ Merci d'avance !`;
                   background: feature.gradient,
                   marginTop: "auto"
                 }} />
-                  </div>
+              </div>
             ))}
-                </div>
+          </div>
 
           {/* Bottom Stats */}
           <div style={{
@@ -2472,16 +2647,16 @@ Merci d'avance !`;
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent"
                 }}>
-                  24/7 Road Assistance
+                  {lang.roadAssistance}
                 </h3>
                 <p style={{
                   fontSize: "16px",
                   lineHeight: "1.6",
                   color: "rgba(255, 255, 255, 0.7)"
                 }}>
-                  Round-the-clock support and assistance anywhere in Morocco
+                  {lang.roadAssistanceDesc}
                 </p>
-            </div>
+              </div>
               <div style={{
                 width: "80px",
                 height: "80px",
@@ -2493,8 +2668,8 @@ Merci d'avance !`;
                 fontSize: "32px"
               }}>
                 🚗
-                </div>
-                </div>
+              </div>
+            </div>
 
             <div style={{
               background: "rgba(255, 255, 255, 0.02)",
@@ -2516,14 +2691,14 @@ Merci d'avance !`;
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent"
                 }}>
-                  Free Pick-Up & Drop-Off
+                  {lang.freePickUpDropOff}
                 </h3>
                 <p style={{
                   fontSize: "16px",
                   lineHeight: "1.6",
                   color: "rgba(255, 255, 255, 0.7)"
                 }}>
-                  Convenient delivery and collection service at your location
+                  {lang.freePickUpDropOffDesc}
                 </p>
               </div>
               <div style={{
@@ -2562,7 +2737,7 @@ Merci d'avance !`;
             display: "block",
             marginBottom: "15px"
           }}>
-            HOW IT WORKS
+            {lang.howItWorks}
           </span>
           <h2 style={{
             fontSize: "32px",
@@ -2570,10 +2745,8 @@ Merci d'avance !`;
             marginBottom: "50px",
             color: "#333"
           }}>
-            Presenting Your New Go-To Car<br />
-            Rental Experience
+            {lang.howItWorksTitle ? lang.howItWorksTitle : `${lang.step1Title} / ${lang.step2Title} / ${lang.step3Title}`}
           </h2>
-          
           <div style={{
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
@@ -2583,26 +2756,26 @@ Merci d'avance !`;
             {[
               {
                 icon: <FaMapMarkerAlt style={{ fontSize: "32px", color: "#fff" }} />,
-                title: "Choose a Location",
-                description: "Select the ideal destination to begin your journey with ease",
+                title: lang.step1Title,
+                description: lang.step1Description,
                 gradient: "linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%)"
               },
               {
                 icon: <FaClipboardList style={{ fontSize: "32px", color: "#fff" }} />,
-                title: "Choose Your Vehicle",
-                description: "Browse our fleet and find the perfect car for your needs",
+                title: lang.step2Title,
+                description: lang.step2Description,
                 gradient: "linear-gradient(135deg, #4ECDC4 0%, #556270 100%)"
               },
               {
                 icon: <FaCar style={{ fontSize: "32px", color: "#fff" }} />,
-                title: "Verification",
-                description: "Review your information and confirm your booking",
+                title: lang.step3Title,
+                description: lang.step3Description,
                 gradient: "linear-gradient(135deg, #6C63FF 0%, #3F3D56 100%)"
               },
               {
                 icon: <FaKey style={{ fontSize: "32px", color: "#fff" }} />,
-                title: "Begin Your Journey",
-                description: "Start your adventure with confidence and ease",
+                title: lang.step4Title || "Begin Your Journey",
+                description: lang.step4Description || "Start your adventure with confidence and ease",
                 gradient: "linear-gradient(135deg, #E31837 0%, #FF6B6B 100%)"
               }
             ].map((step, index) => (
@@ -2641,8 +2814,8 @@ Merci d'avance !`;
                   padding: "4px 12px",
                   borderRadius: "12px"
                 }}>
-                  Step {index + 1}
-          </div>
+                  {lang.step} {index + 1}
+                </div>
 
                 {/* Icon Container */}
                 <div style={{
@@ -2658,7 +2831,7 @@ Merci d'avance !`;
                   boxShadow: "0 10px 20px rgba(0,0,0,0.1)"
                 }}>
                   {step.icon}
-            </div>
+                </div>
 
                 {/* Content */}
                 <h3 style={{
@@ -2699,10 +2872,10 @@ Merci d'avance !`;
                     zIndex: 1
                   }} />
                 )}
-                </div>
-            ))}
               </div>
-                </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Stats Section */}
@@ -2731,165 +2904,78 @@ Merci d'avance !`;
         >
           <source src="/images/inside_car.mp4" type="video/mp4" />
         </video>
-
-        {/* Video Section */}
         <div style={{
           ...styles.videoSection,
-          transform: statsVisible ? 'translateY(0)' : 'translateY(50px)',
-          opacity: statsVisible ? 1 : 0,
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          padding: isMobile ? '0 8px' : styles.videoSection.padding,
+          position: 'relative',
+          zIndex: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '400px',
         }}>
           <div style={{
-            ...styles.videoContent,
-            maxWidth: "800px",
-            margin: "0 auto 60px",
-            padding: isMobile ? '0 4px' : '0 20px',
+            margin: '40px 0 30px 0',
+            textAlign: 'center',
+            zIndex: 3,
           }}>
-            <span style={{
-              fontSize: "16px",
-              fontWeight: "600",
-              color: "#E31837",
-              letterSpacing: "2px",
-              textTransform: "uppercase",
-              display: "block",
-              marginBottom: "10px",
-              marginTop: "50px",
-              opacity: statsVisible ? 1 : 0,
-              transform: statsVisible ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            }}>
-              Luxury Car Rental Service
-            </span>
-            <h2 style={{
-              ...styles.videoTitle,
-              fontSize: isMobile ? '22px' : '32px',
-              fontWeight: "800",
-              lineHeight: "1.2",
-              color: "#fff",
-              textShadow: "0 2px 4px rgba(0,0,0,0.3)",
-              opacity: statsVisible ? 1 : 0,
-              transform: statsVisible ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}>
-              Your Dream Car Awaits
+            <h2 style={{ color: '#fff', fontSize: isMobile ? '22px' : '32px', fontWeight: 800, marginBottom: 20, textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
+              {lang.yourDreamCarAwaits}
             </h2>
-            <p style={{
-              fontSize: isMobile ? '13px' : '18px',
-              lineHeight: "1.6",
-              color: "rgba(255, 255, 255, 0.9)",
-              marginBottom: "30px",
-              maxWidth: "600px",
-              margin: isMobile ? '0 auto 20px' : '0 auto 40px',
-              opacity: statsVisible ? 1 : 0,
-              transform: statsVisible ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}>
-              Experience luxury and comfort with our premium fleet of vehicles. 
-              From elegant sedans to powerful SUVs, find your perfect match today.
+            <p style={{ color: '#fff', fontSize: isMobile ? '13px' : '18px', marginBottom: 30, textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
+              {lang.experienceLuxuryAndComfortWithOurPremiumFleetOfVehicles}
             </p>
-            <Link 
-              to="/available-cars"
-              style={{
-                ...styles.viewAllCarsButton,
-                display: "inline-block",
-                padding: "16px 32px",
-                fontSize: isMobile ? '13px' : '16px',
-                fontWeight: "600",
-                borderRadius: "10px",
-                backgroundColor: "#E31837",
-                color: "#fff",
-                textDecoration: "none",
-                transition: "all 0.3s ease",
-                border: "none",
-                cursor: "pointer",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                opacity: statsVisible ? 1 : 0,
-                transform: statsVisible ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-                e.currentTarget.style.backgroundColor = '#B71C1C';
-                e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.2)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.backgroundColor = '#E31837';
-                e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-              }}
+            <button style={{
+              background: '#E31837',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '10px',
+              padding: '16px 32px',
+              fontSize: isMobile ? '13px' : '16px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              margin: '0 auto',
+              display: 'block',
+              transition: 'all 0.3s ease',
+            }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#B71C1C'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#E31837'; }}
+              onClick={() => window.location.href = '/available-cars'}
             >
-              Explore Our Fleet
-            </Link>
+              {lang.exploreOurFleet}
+            </button>
           </div>
-        </div>
-              
-        {/* Stats Strip */}
-        <div style={{
-          ...styles.statsStripContainer,
-          background: "rgba(0, 0, 0, 0.7)",
-          backdropFilter: "blur(10px)",
-          padding: "40px 0",
-          opacity: statsVisible ? 1 : 0,
-          transform: statsVisible ? 'translateY(0)' : 'translateY(30px)',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-        }}>
           <div style={{
-            ...styles.statsStrip,
-            maxWidth: "1400px",
-            margin: "0 auto"
+            ...styles.statsContainer,
+            background: 'rgba(0,0,0,0.7)',
+            borderRadius: '15px',
+            padding: isMobile ? '20px 0' : '40px 60px',
+            marginTop: 30,
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)',
+            gap: isMobile ? '16px' : '30px',
+            maxWidth: '1000px',
+            width: '100%',
+            zIndex: 3,
           }}>
-            <div style={{
-              ...styles.statsWrapper,
-              display: isMobile ? 'flex' : 'grid',
-              flexDirection: isMobile ? 'column' : undefined,
-              gridTemplateColumns: isMobile ? undefined : 'repeat(4, 1fr)',
-              gap: isMobile ? '16px' : '30px',
-              padding: isMobile ? '0 4px' : '0 20px',
-            }}>
-              {[
-                { value: 400, suffix: "k", text: "Vehicles in Stock" },
-                { value: 25, suffix: "+", text: "Years of Excellence" },
-                { value: 3990, suffix: "+", text: "Happy Clients" },
-                { value: 150, suffix: "+", text: "Expert Reviews" }
-              ].map((stat, index) => (
-                <div 
-                  key={index} 
-                  style={{
-                    ...styles.statItem,
-                    textAlign: "center",
-                    padding: isMobile ? '10px' : '20px',
-                    opacity: statsVisible ? 1 : 0,
-                    transform: statsVisible ? 'translateY(0)' : 'translateY(20px)',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                  }}
-                >
-                  <h3 style={{
-                    ...styles.statValue,
-                    fontSize: isMobile ? '22px' : '36px',
-                    fontWeight: "800",
-                    marginBottom: "10px",
-                    color: "#fff",
-                    textShadow: "0 2px 4px rgba(0,0,0,0.3)"
-                  }}>
-                    <Counter end={stat.value} isVisible={statsVisible} />
-                    {stat.suffix}
-                  </h3>
-                  <p style={{
-                    ...styles.statText,
-                    fontSize: isMobile ? '12px' : '16px',
-                    fontWeight: "500",
-                    color: "rgba(255, 255, 255, 0.9)",
-                    textTransform: "uppercase",
-                    letterSpacing: "1px"
-                  }}>
-                    {stat.text}
-                  </p>
-                </div>
-              ))}
-            </div>
+            {[
+              { end: 50, suffix: '+', label: lang.vehiclesInStock || 'Vehicles in Stock' },
+              { end: 25, suffix: '+', label: lang.yearsOfExcellence || 'Years of Excellence' },
+              { end: 3990, suffix: '+', label: lang.happyClients || 'Happy Clients' },
+              { end: 150, suffix: '+', label: lang.expertReviews || 'Expert Reviews' }
+            ].map((stat, i) => (
+              <div key={i} style={{ textAlign: 'center', color: '#fff' }}>
+                <h3 style={{ fontSize: isMobile ? '22px' : '36px', fontWeight: 800, marginBottom: 10, color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
+                  <Counter end={stat.end} isVisible={statsVisible} />{stat.suffix}
+                </h3>
+                <p style={{ fontSize: isMobile ? '12px' : '16px', fontWeight: 500, color: 'rgba(255,255,255,0.9)', textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -2905,7 +2991,7 @@ Merci d'avance !`;
             <img src="/images/user2.png" alt="Client" style={testimonialStyles.headerAvatar} />
             <img src="/images/user3.png" alt="Client" style={testimonialStyles.headerAvatar} />
           </div>
-          <h2 style={testimonialStyles.testimonialTitle}>What they say about us?</h2>
+          <h2 style={testimonialStyles.testimonialTitle}>{lang.testimonialTitle || lang.whatTheySayAboutUs || 'What they say about us?'}</h2>
         </div>
         <div style={testimonialStyles.testimonialCarousel}>
           <button 
@@ -2997,7 +3083,7 @@ Merci d'avance !`;
         }}>
           <div style={{ ...styles.footerColumn, gap: isMobile ? '10px' : styles.footerColumn.gap }}>
             <h3 style={{ ...styles.footerTitle, fontSize: isMobile ? '16px' : styles.footerTitle.fontSize, paddingBottom: isMobile ? '4px' : styles.footerTitle.paddingBottom }}>
-              About Us
+              {lang.aboutUs}
             </h3>
             <p style={{ ...styles.footerDescription, fontSize: isMobile ? '12px' : styles.footerDescription.fontSize }}>
               Diabcar is your trusted partner in car rental services across Morocco. We offer a wide range of vehicles with competitive prices and exceptional service.
@@ -3017,27 +3103,27 @@ Merci d'avance !`;
 
           <div style={{ ...styles.footerColumn, gap: isMobile ? '10px' : styles.footerColumn.gap }}>
             <h3 style={{ ...styles.footerTitle, fontSize: isMobile ? '16px' : styles.footerTitle.fontSize, paddingBottom: isMobile ? '4px' : styles.footerTitle.paddingBottom }}>
-              Quick Links
+              {lang.quickLinks}
             </h3>
             <ul style={styles.footerList}>
               <li style={styles.footerListItem}>
-                <Link to="/" style={{ ...styles.footerLink, fontSize: isMobile ? '12px' : styles.footerLink.fontSize }}>Home</Link>
+                <Link to="/" style={{ ...styles.footerLink, fontSize: isMobile ? '12px' : styles.footerLink.fontSize }}>{lang.home}</Link>
               </li>
               <li style={styles.footerListItem}>
-                <Link to="/available-cars" style={{ ...styles.footerLink, fontSize: isMobile ? '12px' : styles.footerLink.fontSize }}>Available Cars</Link>
+                <Link to="/available-cars" style={{ ...styles.footerLink, fontSize: isMobile ? '12px' : styles.footerLink.fontSize }}>{lang.availableCars}</Link>
               </li>
               <li style={styles.footerListItem}>
-                <Link to="/contact-us" style={{ ...styles.footerLink, fontSize: isMobile ? '12px' : styles.footerLink.fontSize }}>Contact Us</Link>
+                <Link to="/contact-us" style={{ ...styles.footerLink, fontSize: isMobile ? '12px' : styles.footerLink.fontSize }}>{lang.contactUs}</Link>
               </li>
               <li style={styles.footerListItem}>
-                <Link to="/about-us" style={{ ...styles.footerLink, fontSize: isMobile ? '12px' : styles.footerLink.fontSize }}>About Us</Link>
+                <Link to="/about-us" style={{ ...styles.footerLink, fontSize: isMobile ? '12px' : styles.footerLink.fontSize }}>{lang.aboutUs}</Link>
               </li>
             </ul>
           </div>
 
           <div style={{ ...styles.footerColumn, gap: isMobile ? '10px' : styles.footerColumn.gap }}>
             <h3 style={{ ...styles.footerTitle, fontSize: isMobile ? '16px' : styles.footerTitle.fontSize, paddingBottom: isMobile ? '4px' : styles.footerTitle.paddingBottom }}>
-              Contact Info
+              {lang.contactInfo}
             </h3>
             <ul style={styles.footerList}>
               <li style={styles.footerListItem}>
@@ -3065,12 +3151,12 @@ Merci d'avance !`;
 
           <div style={{ ...styles.footerColumn, gap: isMobile ? '10px' : styles.footerColumn.gap }}>
             <h3 style={{ ...styles.footerTitle, fontSize: isMobile ? '16px' : styles.footerTitle.fontSize, paddingBottom: isMobile ? '4px' : styles.footerTitle.paddingBottom }}>
-              Newsletter
+              {lang.newsletter}
             </h3>
-            <p style={{ ...styles.newsletterText, fontSize: isMobile ? '12px' : styles.newsletterText.fontSize }}>Subscribe to our newsletter for updates and exclusive offers.</p>
+            <p style={{ ...styles.newsletterText, fontSize: isMobile ? '12px' : styles.newsletterText.fontSize }}>{lang.subscribeToOurNewsletterForUpdatesAndExclusiveOffers}</p>
             <div style={{ ...styles.newsletterForm, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '6px' : styles.newsletterForm.gap }}>
-              <input type="email" placeholder="Enter your email" style={{ ...styles.newsletterInput, fontSize: isMobile ? '12px' : styles.newsletterInput.fontSize }} />
-              <button style={{ ...styles.newsletterButton, fontSize: isMobile ? '12px' : styles.newsletterButton.fontSize }}>Subscribe</button>
+              <input type="email" placeholder={lang.enterYourEmail} style={{ ...styles.newsletterInput, fontSize: isMobile ? '12px' : styles.newsletterInput.fontSize }} />
+              <button style={{ ...styles.newsletterButton, fontSize: isMobile ? '12px' : styles.newsletterButton.fontSize }}>{lang.subscribe}</button>
             </div>
           </div>
         </div>
@@ -3083,7 +3169,7 @@ Merci d'avance !`;
         </div>
       </footer>
 
-      <WhatsAppButton phoneNumber="+971501231234" message="Hello, I'm interested in renting a car." />
+      <WhatsAppButton phoneNumber="+212632835968" message="Hello, I'm interested in renting a car." />
       <ScrollToTopButton />
 
       {/* Booking Popup */}
