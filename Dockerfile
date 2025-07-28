@@ -4,7 +4,7 @@ FROM node:18 AS build
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install --legacy-peer-deps
-COPY frontend ./
+COPY ..
 RUN npm run build
 
 # Production stage
